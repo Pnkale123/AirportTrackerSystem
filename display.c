@@ -18,11 +18,12 @@ void displayFlightTableRow(char flightData[rowNum][50], int rowNum)
 
 /**
 * Displays the Table Header for all flights
-* Includes: Airline of flight, flight ID, Origin, Depart time, Arrival, Arrival Time Expected
+* Includes: Airline of flight, flight ID, Origin, Depart time, Arrival, Flight Total
 */
 void displayFlightTableHeader() 
 {
-
+    printf("|--- Airline --- | --- ID --- | ---- Origin ---- | --- Depart Time --- | --- Arrival Time --- | --- Flight Duration --- |");
+    printf("|----------------+------------+------------------+---------------------+----------------------+-------------------------+");
 }
 
 /**
