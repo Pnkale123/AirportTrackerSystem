@@ -6,15 +6,20 @@
 */
 
 #define SUCCESS 0
+#define MAX_FLIGHTS 5
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "Display.h"
 #include "Flight.h"
 
+
 int main() {
     int shouldQuit = 0;
     int userChoice;
+
+    struct Flight flights[MAX_FLIGHTS];
+    getData("flight-1.txt", flights, MAX_FLIGHTS);
 
     while (!shouldQuit) {
         const char options[4][50] = {"Show Flight Table - Enter 1", 
