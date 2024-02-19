@@ -22,8 +22,8 @@ void displayFlightTableRow(char flightData[rowNum][50], int rowNum)
 */
 void displayFlightTableHeader() 
 {
-    printf("|--- Airline --- | --- ID --- | ---- Origin ---- | --- Depart Time --- | --- Arrival Time --- | --- Flight Duration --- |");
-    printf("|----------------+------------+------------------+---------------------+----------------------+-------------------------+");
+    printf("|--- Airline --- | --- ID --- | ---- Origin ---- | --- Depart Time --- | --- Arrival Time --- | --- Flight Duration --- |\n");
+    printf("|----------------+------------+------------------+---------------------+----------------------+-------------------------+\n");
 }
 
 /**
