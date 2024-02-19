@@ -1,0 +1,13 @@
+Current Date: 01/15/2024
+Flight ID: EK405
+Flight Departure Airport: Dubai Intl
+Flight Departure Country: UAE
+Flight Departure Time: 03:00 AM
+Flight Arrival Time: 11:05 AM
+Flight Arrival Airport: London Heathrow Intl
+Seats: 300
+Aircraft Type: Airbus A380
+Pilot: Captain Aisha Malik
+Total Miles on Plane: 9876543
+Total Trips by Plane: 150
+Operator: Emirates Airlines

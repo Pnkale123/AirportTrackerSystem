@@ -1,0 +1,13 @@
+Current Date: 03/26/2024
+Flight ID: LH721
+Flight Departure Airport: Frankfurt Intl
+Flight Departure Country: Germany
+Flight Departure Time: 6:00 AM
+Flight Arrival Time: 1:45 PM
+Flight Arrival Airport: John F. Kennedy Intl
+Seats: 230
+Aircraft Type: Airbus A340
+Pilot: Captain Anna Schmidt
+Total Miles on Plane: 8642013
+Total Trips by Plane: 180
+Operator: Lufthansa

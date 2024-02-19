@@ -1,0 +1,13 @@
+Current Date: 02/19/2024
+Flight ID: DL128
+Flight Departure Airport: Raleigh-Durham Intl
+Flight Departure State/Country: NC, USA
+Flight Departure Time: 12:45 PM
+Flight Arrival Time: 03:00 PM
+Flight Arrival Airport: Chicago O'Hare Intl
+Seats: 200
+Aircraft Type: Boeing 777-300ER
+Pilot: Captain Emily Johnson
+Total Miles on Plane: 7654321
+Total Trips by Plane: 287
+Operator: Delta Airlines

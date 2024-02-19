@@ -1,0 +1,13 @@
+Current Date: 04/21/2024
+Flight ID: AA567
+Flight Departure Airport: Dallas/FW Intl
+Flight Departure State/Country: TX, USA
+Flight Departure Time: 09:30 AM
+Flight Arrival Time: 12:15 PM
+Flight Arrival Airport: Miami Intl
+Seats: 180
+Aircraft Type: Boeing 737-800
+Pilot: Captain Samantha Miller
+Total Miles on Plane: 8765432
+Total Trips by Plane: 215
+Operator: American Airlines
