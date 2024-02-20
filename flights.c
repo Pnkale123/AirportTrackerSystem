@@ -92,4 +92,5 @@ double calculateTotalRevenue(int numSeats, double pricePerSeat)
 {
     double price = numSeats * pricePerSeat;
     return price;
+    // practicce comment
 } 
