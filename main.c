@@ -23,19 +23,19 @@ int main() {
     getData("flight-1.txt", flights, MAX_FLIGHTS);
 
     while (!shouldQuit) {
-        const char options[4][50] = {"Show Flight Table - Enter 1", 
-                                     "Show Flight Data - Enter 2",
-                                     "Show Airports - Enter 3", 
-                                     "Quit the Application - Enter 4"};
+        const char options[4][50] = {"Show Flight Table - Enter 1\n", 
+                                     "Show Flight Data - Enter 2\n",
+                                     "Show Airports - Enter 3\n", 
+                                     "Quit the Application - Enter 4\n"};
         displayMenuOptions();
 
         // Get user input
         printf("Enter your choice: \n");
-        scanf("%d", userChoice);
+        scanf("%d", &userChoice);
         int countFails = 0;
         while (userChoice != 1 && userChoice != 2 && userChoice != 3 && userChoice != 4 ) {
             if (countFails > 4) {
-                printf("You have failed options more than four times!");
+                printf("You have failed options more than four times!\n");
                 shouldQuit = 1;
                 break;
             }
@@ -45,7 +45,22 @@ int main() {
             countFails++;
         }
         // Process user's choice
-       
+        switch (userChoice) {
+            case 1:
+                showFlightTable(flights, MAX_FLIGHTS);
+                break;
+            case 2:
+                showFlightData(flights, MAX_FLIGHTS);
+                break;
+            case 3:
+                showAirports(flights, MAX_FLIGHTS);
+                break;
+            case 4:
+                shouldQuit = 1;
+                break;
+            default:
+                break;
+        }
 
         // Check if the user wants to quit
         if (userChoice == 4) {

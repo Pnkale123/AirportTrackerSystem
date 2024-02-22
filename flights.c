@@ -54,7 +54,7 @@ double calculateAverageMilesPerFlight(double miles, int trips) {
 */
 char* calculateFlightTime(const char departTime[], const char arrivalTime[]) 
 {
-   int departHour, departMinutes, arrivalHour, arrivalMinutes;
+    int departHour, departMinutes, arrivalHour, arrivalMinutes;
     char departFormat[3], arrivalFormat[3];
 
     sscanf(departTime, "%d:%d %2s", &departHour, &departMinutes, departFormat);
@@ -81,6 +81,7 @@ char* calculateFlightTime(const char departTime[], const char arrivalTime[])
     char* time = (char*)malloc(30);
     // Format the result
     sprintf(time, "%d hours and %d minutes", hours, minutes);
+    free(time);
     return time;
 }
 
@@ -92,5 +93,4 @@ double calculateTotalRevenue(int numSeats, double pricePerSeat)
 {
     double price = numSeats * pricePerSeat;
     return price;
-    // practicce comment
 } 

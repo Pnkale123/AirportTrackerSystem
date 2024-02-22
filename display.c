@@ -33,7 +33,11 @@ void displayFlightTableHeader()
 */
 void clearConsole()
 {
-
+    #ifdef _WIN32
+      system("cls");
+    #else
+      system("clear");
+    #endif
 }
 
 /**
@@ -41,7 +45,9 @@ void clearConsole()
 */
 void displayMenuOptions(const char * options[]) 
 {
-
+    for (int i = 0; i < 4; i++) {
+        printf("%s\n", options[i]);
+    }
 }
 
 /**
