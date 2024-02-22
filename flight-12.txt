@@ -1,0 +1,13 @@
+Current Date: 08/23/2024
+Flight ID: F528
+Flight Departure Airport: Miami Intl
+Flight Departure State: FL, USA
+Flight Departure Time: 8:45 PM
+Flight Arrival Time: 01:20 AM
+Flight Arrival Airport: Denver Intl
+Seats: 220
+Aircraft Type: Airbus A321neo
+Pilot: Captain Ethan Turner
+Total Miles on Plane: 3165892
+Total Trips by Plane: 170
+Operator: Frontier Airlines

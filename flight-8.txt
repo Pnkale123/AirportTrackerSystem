@@ -1,0 +1,13 @@
+Current Date: 05/23/2024
+Flight ID: SU301
+Flight Departure Airport: Sheremetyevo Intl
+Flight Departure Country: Russia
+Flight Departure Time: 07:00 AM
+Flight Arrival Time: 03:45 PM
+Flight Arrival Airport: Shanghai Pudong Intl
+Seats: 250
+Aircraft Type: Airbus A330
+Pilot: Captain Dmitri Ivanov
+Total Miles on Plane: 6324891
+Total Trips by Plane: 188
+Operator: Aeroflot Russian Airlines

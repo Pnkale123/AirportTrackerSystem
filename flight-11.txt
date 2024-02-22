@@ -1,0 +1,13 @@
+Current Date: 09/28/2024
+Flight ID: F917
+Flight Departure Airport: Raleigh-Durham Intl
+Flight Departure State: NC, USA
+Flight Departure Time: 04:30 AM
+Flight Arrival Time: 10:40 AM
+Flight Arrival Airport: Seattle-Tacoma Intl
+Seats: 230
+Aircraft Type: Boeing 737-800
+Pilot: Captain Harper Mitchell
+Total Miles on Plane: 2987654
+Total Trips by Plane: 165
+Operator: Frontier Airlines

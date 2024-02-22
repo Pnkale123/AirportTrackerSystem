@@ -1,0 +1,13 @@
+Current Date: 06/14/2024
+Flight ID: AA301
+Flight Departure Airport: Dallas/FW Intl
+Flight Departure State: TX, USA
+Flight Departure Time: 09:45 AM
+Flight Arrival Time: 11:55 AM
+Flight Arrival Airport: Denver Intl
+Seats: 200
+Aircraft Type: Airbus A320
+Pilot: Captain Olivia Johnson
+Total Miles on Plane: 3765412
+Total Trips by Plane: 180
+Operator: American Airlines

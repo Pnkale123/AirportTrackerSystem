@@ -1,0 +1,13 @@
+Current Date: 09/08/2024
+Flight ID: EY183
+Flight Departure Airport: Abu Dhabi Intl
+Flight Departure Country: UAE
+Flight Departure Time: 10:45 AM
+Flight Arrival Time: 01:30 AM
+Flight Arrival Airport: John F. Kennedy Intl
+Seats: 240
+Aircraft Type: Airbus A380
+Pilot: Captain Sofia Al-Farsi
+Total Miles on Plane: 5629378
+Total Trips by Plane: 175
+Operator: Etihad Airways

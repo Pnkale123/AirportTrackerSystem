@@ -1,0 +1,13 @@
+Current Date: 08/17/2024
+Flight ID: EK721
+Flight Departure Airport: Dubai Intl
+Flight Departure Country: UAE
+Flight Departure Time: 01:45 AM
+Flight Arrival Time: 10:05 PM
+Flight Arrival Airport: Seoul Incheon Intl
+Seats: 280
+Aircraft Type: Airbus A380
+Pilot: Captain Mei Lin
+Total Miles on Plane: 5748123
+Total Trips by Plane: 215
+Operator: Emirates Airlines

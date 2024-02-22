@@ -1,0 +1,13 @@
+Current Date: 07/11/2024
+Flight ID: QF25
+Flight Departure Airport: Sydney Kingsford Intl
+Flight Departure Country: Australia
+Flight Departure Time: 12:30 PM
+Flight Arrival Time: 01:30 AM
+Flight Arrival Airport: Los Angeles Intl
+Seats: 280
+Aircraft Type: Boeing 787-9 Dreamliner
+Pilot: Captain Liam Foster
+Total Miles on Plane: 6938247
+Total Trips by Plane: 198
+Operator: Qantas Airways
