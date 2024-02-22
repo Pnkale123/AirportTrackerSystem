@@ -16,7 +16,6 @@ void getData(const char fname[], struct Flight flights[], int maxFlights) {
         perror("Error opening file");
         exit(EXIT_FAILURE);
     }
-
     // Read data from the file
     for (int i = 0; i < maxFlights; i++) {
         fscanf(input, "Current Date: %s", flights[i].date);
@@ -91,6 +90,17 @@ char* calculateFlightTime(const char departTime[], const char arrivalTime[])
 */
 double calculateTotalRevenue(int numSeats, double pricePerSeat)
 {
+    // Calculate price of seats using fixed price
     double price = numSeats * pricePerSeat;
     return price;
 } 
+
+/**
+ * Calculate the number of remaining seats on a flight.
+ * Takes the total number of seats and the number of seats booked.
+ * Returns the remaining number of seats.
+ */
+int calculateRemainingSeats(int totalSeats, int seatsBooked) {
+    int remainingSeats = totalSeats - seatsBooked;
+    return (remainingSeats >= 0) ? remainingSeats : 0;
+}
