@@ -3,7 +3,7 @@
 *  @file flights.h 
 *  @author Pranav Kale
 */
-
+#include "flights.c"
 #ifndef FLIGHT_H
 #define FLIGHT_H
 
