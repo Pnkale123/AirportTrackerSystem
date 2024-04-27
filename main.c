@@ -7,19 +7,30 @@
 
 #define SUCCESS 0
 #define MAX_FLIGHTS 12
+#define MATCHES2 2
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "display.h"
 #include "flights.h"
+#include "display.h"
+#include "input.h"
 
 // Function prototype
-void loadFlightData(FlightDatabase *fdatab, int maxFlights);
+void loadFlightData(const char *filename, FlightDatabase *fdatab);
 
-// Function to clear input buffer
-void clearInputBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+void displayFlightData(Flight *flight) {
+    printf("Flight ID: %s\n", flight->flightID);
+    printf("Departure Airport: %s\n", flight->departureAirport);
+    // Add more fields as needed
+}
+/**
+* Prints a message when program is given invalid arguments 
+*/
+static void usage()
+{
+    fprintf( stderr, "usage: main flight-file+\n" );
+    exit(EXIT_FAILURE);
 }
 
 /**
@@ -27,64 +38,93 @@ void clearInputBuffer() {
     @param argv the number of arguments
     @param argc the arguments
 */
-int main(int argv, char *argc[]) {
-    int shouldQuit = 0;
-    int userChoice;
+int main(int argc, char *argv[]) {
 
-    // struct Flight flights[MAX_FLIGHTS];
+    if (argc < MATCHES2 || argc > MAX_FLIGHTS) {
+        usage();
+    }
+
     FlightDatabase *fdatab = makeDatabase();
 
-    loadFlightData(fdatab, MAX_FLIGHTS);
+    for (int i = 1; i < argc; i++) {
+        loadFlightData(argv[i], fdatab);
+    }
+    
+    char *command;
 
-    while (!shouldQuit) {
-        const char options[4][50] = {"Show Flight Table - Enter 1\n", 
-                                     "Show Flight Data - Enter 2\n",
-                                     "Show Airports - Enter 3\n", 
-                                     "Quit the Application - Enter 4\n"};
+    while (true) {
+        const char options[5][50] = {"Show Flight Table - Enter -> list \n", 
+                                     "Show Flight Data - Enter -> status <flight ID>\n",
+                                     "Show Airports - Enter -> list airports \n",
+                                     "Book your flight - Enter -> book <flight ID> \n", 
+                                     "Quit the Application - Enter -> quit \n"};  
         displayMenuOptions(options);
+        printf("cmd> ");
 
-        // Get user input
-        printf("Enter your choice: \n");
-        scanf("%d", &userChoice);
-        clearInputBuffer(); // Clear input buffer
+        command = readLine(stdin);
 
-        // Validate user input
-        if (userChoice < 1 || userChoice > 4) {
-            printf("Invalid Option!\n");
-            continue; // Skip processing and re-prompt
+        if (command == NULL) {
+            break;
+        } 
+        if (strcmp(command, "list") == 0) {
+            printf("%s\n", command);
+            displayFlightTableHeader();
+            displayFlightTableRow(fdatab);
+
         }
-
-        // Process user's choice
-        switch (userChoice) {
-            case 1:
-                // showFlightTable(flights, MAX_FLIGHTS);
-                break;
-            case 2:
-                // showFlightData(flights, MAX_FLIGHTS);
-                break;
-            case 3:
-                // showAirports(flights, MAX_FLIGHTS);
-                break;
-            case 4:
-                shouldQuit = 1;
-                break;
-            default:
-                break;
+        else if (strcmp(command, "quit") == 0) { 
+            printf("%s\n", command);
+            free(command);
+            break;
+        } else {
+            printf("%s\n", command);
+            printf("Invalid command\n");
+            free(command);
         }
+        printf("\n");
+
+        // switch () {
+        //     case 1:
+        //         // showFlightTable(flights, MAX_FLIGHTS);
+        //         break;
+        //     case 2:
+        //         // showFlightData(flights, MAX_FLIGHTS);
+        //         break;
+        //     case 3:
+        //         // showAirports(flights, MAX_FLIGHTS);
+        //         break;
+        //     case 4:
+        //         shouldQuit = 1;
+        //         break;
+        //     default:
+        //         break;
+        // }
     }
 
     printf("Exiting the Flight Information App...\n");
-    
+        
     return EXIT_SUCCESS;
 }
 
-void loadFlightData(FlightDatabase *fdatab, int maxFlights) {
-    for (int i = 0; i < maxFlights; i++) {
-        char filename[20];
-        snprintf(filename, sizeof(filename), "flight-%d.txt", i + 1);
-        if (getData(filename, *fdatab, maxFlights) != 0) {
-            fprintf(stderr, "Error loading data from %s. Exiting...\n", filename);
-            exit(EXIT_FAILURE);
-        }
+void loadFlightData(const char *filename, FlightDatabase *fdatab) {
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL) {
+        fprintf(stderr, "Error opening file %s\n", filename);
+        exit(EXIT_FAILURE);
     }
+    Flight *newFlight = (Flight *)malloc(sizeof(Flight)); 
+    if (!getData(filename, newFlight)) {
+        fprintf(stderr, "Error reading flight data from %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+    fdatab->flight[fdatab->count++] = newFlight;
+    fclose(fp);
 }
+    // for (int i = 0; i < maxFlights; i++) {
+    //     char filename[20];
+    //     snprintf(filename, sizeof(filename), "flight-%d.txt", i + 1);
+    //     if (getData(filename, fdatab->flight, maxFlights) != 0) {
+    //         fprintf(stderr, "Error loading data from %s. Exiting...\n", filename);
+    //         exit(EXIT_FAILURE);
+    //     }
+    // }

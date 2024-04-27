@@ -45,6 +45,6 @@ typedef struct {
 
 FlightDatabase *makeDatabase();
 
-bool getData(const char fname[], Flight *flights[], int maxFlights);
+bool getData(const char fname[], Flight *flight);
 
 #endif

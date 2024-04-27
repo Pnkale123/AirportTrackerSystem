@@ -4,10 +4,12 @@
 *  @author Pranav Kale
 */
 
+#include "flights.h"
+
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-void displayFlightTableRow(char flightData[][50], int rowNum);
+void displayFlightTableRow(FlightDatabase *fdatab);
 void displayFlightTableHeader();
 void clearConsole();
 void displayMenuOptions(const char options[][50]);

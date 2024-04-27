@@ -25,34 +25,30 @@ FlightDatabase *makeDatabase()
     return flightdb;
 }
 
-bool getData(const char fname[], Flight *flights[], int maxFlights) {
+bool getData(const char fname[], Flight *flight) {
     FILE *input = fopen(fname, "r");
+    printf("filename: 2 %s", fname);
     if (input == NULL) {
         perror("Error opening file");
         return false;
     }
-    // Read data from the file
-    for (int i = 0; i < maxFlights; i++) {
-        flights[i] = (Flight *) malloc(sizeof(Flight)); // Allocate memory for each flight
-        fscanf(input, "Current Date: %s", flights[i]->date);
-        fscanf(input, "Flight ID: %s", flights[i]->flightID);
-        fscanf(input, "Flight Departure Airport: %[^\n]", flights[i]->departureAirport);
-        fscanf(input, "Flight Departure Country: %[^\n]", flights[i]->departureCountry);
-        fscanf(input, "Flight Departure Time: %s", flights[i]->departTime);
-        fscanf(input, "Flight Arrival Time: %s", flights[i]->arrivalTime);
-        fscanf(input, "Flight Arrival Airport: %[^\n]", flights[i]->arrivalAirport);
-        fscanf(input, "Seats: %d", &flights[i]->seats);
-        fscanf(input, "Aircraft Type: %[^\n]", flights[i]->aircraftType);
-        fscanf(input, "Pilot: %[^\n]", flights[i]->pilot);
-        fscanf(input, "Total Miles on Plane: %lf", &flights[i]->totalMiles);
-        fscanf(input, "Total Trips by Plane: %d", &flights[i]->totalTrips);
-        fscanf(input, "Operator: %[^\n]", flights[i]->operator);
 
-        // Consume the newline character after each block
-        fgetc(input);
-    }
+    fscanf(input, "Current Date: %[^\n]\n", flight->date);
+    fscanf(input, "Flight ID: %[^\n]\n", flight->flightID);
+    fscanf(input, "Flight Departure Airport: %[^\n]\n", flight->departureAirport);
+    fscanf(input, "Flight Departure Country: %[^\n]\n", flight->departureCountry);
+    fscanf(input, "Flight Departure Time: %[^\n]\n", flight->departTime);
+    fscanf(input, "Flight Arrival Time: %[^\n]\n", flight->arrivalTime);
+    fscanf(input, "Flight Arrival Airport: %[^\n]\n", flight->arrivalAirport);
+    fscanf(input, "Seats: %d\n", &flight->seats);
+    fscanf(input, "Aircraft Type: %[^\n]\n", flight->aircraftType);
+    fscanf(input, "Pilot: %[^\n]\n", flight->pilot);
+    fscanf(input, "Total Miles on Plane: %lf\n", &flight->totalMiles);
+    fscanf(input, "Total Trips by Plane: %d\n", &flight->totalTrips);
+    fscanf(input, "Operator: %[^\n]\n", flight->operator);
 
     fclose(input);
+
 
     return true;
 }

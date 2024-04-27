@@ -8,13 +8,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "display.h"
+#include "flights.h"
+
 /**
 * Display all the flights as a row in the table based on given 2d array
 * 
 */
-void displayFlightTableRow(char flightData[rowNums][50], int rowNum)
+void displayFlightTableRow(FlightDatabase *fdatab)
 {
-
+  for (int i = 0; i < fdatab->count; i++) {
+        Flight *flight = fdatab->flight[i];
+        printf("| %-15s | %-6s | %-20s | %-9s | %-7s | %-5s |\n",
+               flight->operator,
+               flight->flightID,
+               flight->departureAirport,
+               flight->departTime,
+               flight->arrivalTime,
+               flight->arrivalAirport);
+  }
 }
 
 /**
@@ -23,8 +34,8 @@ void displayFlightTableRow(char flightData[rowNums][50], int rowNum)
 */
 void displayFlightTableHeader() 
 {
-    printf("|--- Airline --- | --- ID --- | ---- Origin ---- | --- Depart Time --- | --- Arrival Time --- | --- Flight Duration --- |\n");
-    printf("|----------------+------------+------------------+---------------------+----------------------+-------------------------+\n");
+    printf("|      Airline      |   ID   |                      |    Departure   |    Arrival    | Flight Duration |\n");
+    printf("|-------------------+--------+----------------------+----------------+---------------+-----------------+\n");
 }
 
 /**
@@ -46,7 +57,7 @@ void clearConsole()
 */
 void displayMenuOptions(const char options[][50]) 
 {
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
         printf("%s\n", options[i]);
     }
 }
