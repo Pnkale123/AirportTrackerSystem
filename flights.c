@@ -9,35 +9,54 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "flights.h"
 
-void getData(const char fname[], struct Flight flights[], int maxFlights) {
+/**
+* Constructs an Inventory Structure 
+* Dynamically Allocates Memory
+* @return recordInventory the newly allocated inventory
+*/
+FlightDatabase *makeDatabase() 
+{
+    FlightDatabase *flightdb = (FlightDatabase *) malloc(sizeof(FlightDatabase));
+    flightdb->flight = (Flight **) malloc(INITIALCAP * sizeof(Flight *));
+    flightdb->count = 0;
+    flightdb->capacity = INITIALCAP;
+    return flightdb;
+}
+
+bool getData(const char fname[], Flight *flights[], int maxFlights) {
     FILE *input = fopen(fname, "r");
     if (input == NULL) {
         perror("Error opening file");
-        exit(EXIT_FAILURE);
+        return false;
     }
     // Read data from the file
     for (int i = 0; i < maxFlights; i++) {
-        fscanf(input, "Current Date: %s", flights[i].date);
-        fscanf(input, "Flight ID: %s", flights[i].flightID);
-        fscanf(input, "Flight Departure Airport: %[^\n]", flights[i].departureAirport);
-        fscanf(input, "Flight Departure Country: %[^\n]", flights[i].departureCountry);
-        fscanf(input, "Flight Departure Time: %s", flights[i].departTime);
-        fscanf(input, "Flight Arrival Time: %s", flights[i].arrivalTime);
-        fscanf(input, "Flight Arrival Airport: %[^\n]", flights[i].arrivalAirport);
-        fscanf(input, "Seats: %d", &flights[i].seats);
-        fscanf(input, "Aircraft Type: %[^\n]", flights[i].aircraftType);
-        fscanf(input, "Pilot: %[^\n]", flights[i].pilot);
-        fscanf(input, "Total Miles on Plane: %lf", &flights[i].totalMiles);
-        fscanf(input, "Total Trips by Plane: %d", &flights[i].totalTrips);
-        fscanf(input, "Operator: %[^\n]", flights[i].operator);
+        flights[i] = (Flight *) malloc(sizeof(Flight)); // Allocate memory for each flight
+        fscanf(input, "Current Date: %s", flights[i]->date);
+        fscanf(input, "Flight ID: %s", flights[i]->flightID);
+        fscanf(input, "Flight Departure Airport: %[^\n]", flights[i]->departureAirport);
+        fscanf(input, "Flight Departure Country: %[^\n]", flights[i]->departureCountry);
+        fscanf(input, "Flight Departure Time: %s", flights[i]->departTime);
+        fscanf(input, "Flight Arrival Time: %s", flights[i]->arrivalTime);
+        fscanf(input, "Flight Arrival Airport: %[^\n]", flights[i]->arrivalAirport);
+        fscanf(input, "Seats: %d", &flights[i]->seats);
+        fscanf(input, "Aircraft Type: %[^\n]", flights[i]->aircraftType);
+        fscanf(input, "Pilot: %[^\n]", flights[i]->pilot);
+        fscanf(input, "Total Miles on Plane: %lf", &flights[i]->totalMiles);
+        fscanf(input, "Total Trips by Plane: %d", &flights[i]->totalTrips);
+        fscanf(input, "Operator: %[^\n]", flights[i]->operator);
 
         // Consume the newline character after each block
         fgetc(input);
     }
 
     fclose(input);
+
+    return true;
 }
+
 
 double calculateAverageMilesPerFlight(double miles, int trips) {
     double average = (double) miles / trips;

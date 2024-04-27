@@ -4,14 +4,15 @@
 *  @file Display.c 
 *  @author Pranav Kale pkale 
 */
+
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "display.h"
 /**
 * Display all the flights as a row in the table based on given 2d array
 * 
 */
-void displayFlightTableRow(char flightData[rowNum][50], int rowNum)
+void displayFlightTableRow(char flightData[rowNums][50], int rowNum)
 {
 
 }
@@ -43,7 +44,7 @@ void clearConsole()
 /**
 * Display's all the menu options to user
 */
-void displayMenuOptions(const char * options[]) 
+void displayMenuOptions(const char options[][50]) 
 {
     for (int i = 0; i < 4; i++) {
         printf("%s\n", options[i]);

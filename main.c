@@ -7,55 +7,63 @@
 
 #define SUCCESS 0
 #define MAX_FLIGHTS 12
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Display.h"
-#include "Flight.h"
+#include "display.h"
+#include "flights.h"
 
-// Function prototypes
-void loadFlightData(struct Flight flights[], int maxFlights);
+// Function prototype
+void loadFlightData(FlightDatabase *fdatab, int maxFlights);
 
-int main() {
+// Function to clear input buffer
+void clearInputBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+/**
+    Starting point of program
+    @param argv the number of arguments
+    @param argc the arguments
+*/
+int main(int argv, char *argc[]) {
     int shouldQuit = 0;
     int userChoice;
 
-    struct Flight flights[MAX_FLIGHTS];
-    loadFlightData(flights, MAX_FLIGHTS);
+    // struct Flight flights[MAX_FLIGHTS];
+    FlightDatabase *fdatab = makeDatabase();
+
+    loadFlightData(fdatab, MAX_FLIGHTS);
 
     while (!shouldQuit) {
         const char options[4][50] = {"Show Flight Table - Enter 1\n", 
                                      "Show Flight Data - Enter 2\n",
                                      "Show Airports - Enter 3\n", 
                                      "Quit the Application - Enter 4\n"};
-        displayMenuOptions();
+        displayMenuOptions(options);
 
         // Get user input
         printf("Enter your choice: \n");
         scanf("%d", &userChoice);
-        int countFails = 0;
-        while (userChoice != 1 && userChoice != 2 && userChoice != 3 && userChoice != 4 ) {
-            if (countFails > 4) {
-                printf("You have failed options more than four times!\n");
-                shouldQuit = 1;
-                break;
-            }
+        clearInputBuffer(); // Clear input buffer
+
+        // Validate user input
+        if (userChoice < 1 || userChoice > 4) {
             printf("Invalid Option!\n");
-            printf("Please Re Enter: \n");
-            scanf("%d", &userChoice);
-            countFails++;
+            continue; // Skip processing and re-prompt
         }
+
         // Process user's choice
         switch (userChoice) {
             case 1:
-                showFlightTable(flights, MAX_FLIGHTS);
+                // showFlightTable(flights, MAX_FLIGHTS);
                 break;
             case 2:
-                showFlightData(flights, MAX_FLIGHTS);
+                // showFlightData(flights, MAX_FLIGHTS);
                 break;
             case 3:
-                showAirports(flights, MAX_FLIGHTS);
+                // showAirports(flights, MAX_FLIGHTS);
                 break;
             case 4:
                 shouldQuit = 1;
@@ -63,23 +71,18 @@ int main() {
             default:
                 break;
         }
-
-        // Check if the user wants to quit
-        if (userChoice == 4) {
-            shouldQuit = 1;
-        }
     }
 
     printf("Exiting the Flight Information App...\n");
-
-    exit(SUCCESS);
+    
+    return EXIT_SUCCESS;
 }
 
-void loadFlightData(struct Flight flights[], int maxFlights) {
-    for (int i = 1; i <= 12; i++) {
+void loadFlightData(FlightDatabase *fdatab, int maxFlights) {
+    for (int i = 0; i < maxFlights; i++) {
         char filename[20];
-        snprintf(filename, sizeof(filename), "flight-%d.txt", i);
-        if (getData(filename, flights, maxFlights) != 0) {
+        snprintf(filename, sizeof(filename), "flight-%d.txt", i + 1);
+        if (getData(filename, *fdatab, maxFlights) != 0) {
             fprintf(stderr, "Error loading data from %s. Exiting...\n", filename);
             exit(EXIT_FAILURE);
         }

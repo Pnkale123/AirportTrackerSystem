@@ -4,6 +4,4 @@
 *  @author Pranav Kale
 */
 
-#include "main.c"
-#include "display.c"
-#include "flights.c"
+#ifndef MAIN_H

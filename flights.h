@@ -3,11 +3,19 @@
 *  @file flights.h 
 *  @author Pranav Kale
 */
-#include "flights.c"
-#ifndef FLIGHT_H
-#define FLIGHT_H
 
-struct Flight {
+#include <stdbool.h>
+
+#ifndef FLIGHTS_H
+#define FLIGHTS_H
+
+#define INITIALCAP 12
+
+/** 
+    Structure to store the flight details
+    Includes information like date, flightID, airports, etc.
+*/
+typedef struct {
     char date[20];
     char flightID[10];
     char departureAirport[50];
@@ -21,9 +29,22 @@ struct Flight {
     double totalMiles;
     int totalTrips;
     char operator[50];
-};
+} Flight;
 
-void getData(const char fname[], struct Flight flights[], int maxFlights);
+/**
+* Structure for Flight Data base 
+* Includes the Pointers to flights
+* Includes the Count for tracking number of flights
+* Includes the Capacity for memory usage
+*/
+typedef struct {
+    Flight **flight;
+    int count;
+    int capacity;
+} FlightDatabase;
+
+FlightDatabase *makeDatabase();
+
+bool getData(const char fname[], Flight *flights[], int maxFlights);
 
 #endif
-
