@@ -18,7 +18,7 @@ void displayFlightTableRow(FlightDatabase *fdatab)
 {
   for (int i = 0; i < fdatab->count; i++) {
         Flight *flight = fdatab->flight[i];
-        printf("| %-15s | %-6s | %-20s | %-9s | %-7s | %-5s |\n",
+        printf("| %-21s | %-5s | %-21s | %-10s | %-9s | %-5s |\n",
                flight->operator,
                flight->flightID,
                flight->departureAirport,
@@ -34,8 +34,8 @@ void displayFlightTableRow(FlightDatabase *fdatab)
 */
 void displayFlightTableHeader() 
 {
-    printf("|      Airline      |   ID   |                      |    Departure   |    Arrival    | Flight Duration |\n");
-    printf("|-------------------+--------+----------------------+----------------+---------------+-----------------+\n");
+    printf("|        Airline        |   ID  |        Origin         |  Departed  |  Arrival  | Flight Duration |\n");
+    printf("|-----------------------+-------+-----------------------+------------+-----------+-----------------+\n");
 }
 
 /**

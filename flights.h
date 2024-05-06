@@ -43,8 +43,17 @@ typedef struct {
     int capacity;
 } FlightDatabase;
 
+/** 
+    Creates database to store all the flights in struct
+    @return a flight database struct
+*/
 FlightDatabase *makeDatabase();
 
+/** 
+    Get all the data for a flight 
+    @param fname to store flights
+    @param flight the pointer to flight struct
+*/
 bool getData(const char fname[], Flight *flight);
 
 #endif
