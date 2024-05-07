@@ -41,10 +41,10 @@ void displayApp() {
         printf("|                                 _____                          |\n");
         printf("|   ___  _  _        _    _       |  \\                           |\n");
         printf("|  | __|| |(_) __ _ | |_ | |_     |   \\_________________         |\n");
-        printf("|  | _| | || |/ _` || ' \\|  _|    |______         \\_____\\_____   |\n");
-        printf("|  |_|  |_||_|\\__, ||_||_|\\__|     \\____/__,-------,__________)  |\n");
+        printf("|  | _| | || |/ _` || ' \\|  _|    |______         \\_____\\___     |\n");
+        printf("|  |_|  |_||_|\\__, ||_||_|\\__|     \\____/__,-------,________)    |\n");
         printf("|              |___/                      \\     /                |\n");
-        printf("|   __  __                                |____/__              |\n");
+        printf("|   __  __                                |____/__               |\n");
         printf("|  |  \\/  | __ _  _ _   __ _  __ _  ___  _ _                     |\n");
         printf("|  | |\\/| |/ _` || ' \\ / _` |/ _` |/ -_)| '_|                    |\n");
         printf("|  |_|  |_|\\__,_||_||_|\\__,_|\\__, |\\___||_|                      |\n");
@@ -65,6 +65,7 @@ int main(int argc, char *argv[]) {
 
     FlightDatabase *fdatab = makeDatabase();
 
+    // Debugging
     for (int i = 1; i < argc; i++) {
         loadFlightData(argv[i], fdatab);
     }
@@ -95,10 +96,10 @@ int main(int argc, char *argv[]) {
             displayFlightTableHeader();
             displayFlightTableRow(fdatab);
 
-        // } else if (sscanf(command, "status %s[^\n]", flightIdentifier) == 1) {
-        //     printf("status %s\n", flightIdentifier);
-        //     displayFlightData();
-        //     free(command);
+        } else if (sscanf(command, "status %s[^\n]", flightIdentifier) == 1) {
+            printf("status %s\n", flightIdentifier);
+            displaySingleFlightData(fdatab, flightIdentifier);
+            free(command);
         } else if (strcmp(command, "help commands") == 0) {
             printf("%s\n\n", command);
             displayMenuOptions(options);

@@ -1,7 +1,7 @@
 Current Date: 08/02/2024
 Flight ID: UA743
 Flight Departure Airport: John F. Kennedy Intl
-Flight Departure State/Country: NY, USA
+Flight Departure Country: NY, USA
 Flight Departure Time: 01:00 AM
 Flight Arrival Time: 07:45 AM
 Flight Arrival Airport: Vancouver Intl

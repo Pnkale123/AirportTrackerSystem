@@ -1,7 +1,7 @@
 Current Date: 09/28/2024
 Flight ID: F917
 Flight Departure Airport: Raleigh-Durham Intl
-Flight Departure State: NC, USA
+Flight Departure Country: NC, USA
 Flight Departure Time: 04:30 AM
 Flight Arrival Time: 10:40 AM
 Flight Arrival Airport: Seattle-Tacoma Intl

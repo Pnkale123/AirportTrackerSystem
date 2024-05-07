@@ -25,13 +25,8 @@ FlightDatabase *makeDatabase()
     return flightdb;
 }
 
-bool getData(const char fname[], Flight *flight) {
+bool getData(const char * fname, Flight *flight) {
     FILE *input = fopen(fname, "r");
-    printf("filename: 2 %s", fname);
-    if (input == NULL) {
-        perror("Error opening file");
-        return false;
-    }
 
     fscanf(input, "Current Date: %[^\n]\n", flight->date);
     fscanf(input, "Flight ID: %[^\n]\n", flight->flightID);
@@ -46,9 +41,8 @@ bool getData(const char fname[], Flight *flight) {
     fscanf(input, "Total Miles on Plane: %lf\n", &flight->totalMiles);
     fscanf(input, "Total Trips by Plane: %d\n", &flight->totalTrips);
     fscanf(input, "Operator: %[^\n]\n", flight->operator);
-
+    
     fclose(input);
-
 
     return true;
 }

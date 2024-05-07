@@ -1,7 +1,7 @@
 Current Date: 06/14/2024
 Flight ID: AA301
 Flight Departure Airport: Dallas/FW Intl
-Flight Departure State: TX, USA
+Flight Departure Country: TX, USA
 Flight Departure Time: 09:45 AM
 Flight Arrival Time: 11:55 AM
 Flight Arrival Airport: Denver Intl

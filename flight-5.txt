@@ -1,7 +1,7 @@
 Current Date: 02/19/2024
 Flight ID: DL128
 Flight Departure Airport: Raleigh-Durham Intl
-Flight Departure State/Country: NC, USA
+Flight Departure Country: NC, USA
 Flight Departure Time: 12:45 PM
 Flight Arrival Time: 03:00 PM
 Flight Arrival Airport: Chicago O'Hare Intl
