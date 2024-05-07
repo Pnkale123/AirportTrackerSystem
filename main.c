@@ -22,7 +22,6 @@ void loadFlightData(const char *filename, FlightDatabase *fdatab);
 void displayFlightData(Flight *flight) {
     printf("Flight ID: %s\n", flight->flightID);
     printf("Departure Airport: %s\n", flight->departureAirport);
-    // Add more fields as needed
 }
 /**
 * Prints a message when program is given invalid arguments 
@@ -33,6 +32,26 @@ static void usage()
     exit(EXIT_FAILURE);
 }
 
+void displayApp() {
+    printf("\n.————————————————————————————————————————————————————————————————.\n");
+        printf("|  __       __     __                         __                 |\n");
+        printf("|  \\ \\     / /___ | | __  ___  _ __   ___    | |_  ___           |\n");
+        printf("|   \\ \\//\\/ // -_)| |/ _|/ _ \\| '  \\ / -_)   |  _|/ _ \\          |\n");
+        printf("|    \\_//\\_/ \\___||_|\\__|\\___/|_|_|_|\\___|    \\__|\\___/          |\n");
+        printf("|                                 _____                          |\n");
+        printf("|   ___  _  _        _    _       |  \\                           |\n");
+        printf("|  | __|| |(_) __ _ | |_ | |_     |   \\_________________         |\n");
+        printf("|  | _| | || |/ _` || ' \\|  _|    |______         \\_____\\_____   |\n");
+        printf("|  |_|  |_||_|\\__, ||_||_|\\__|     \\____/__,-------,__________)  |\n");
+        printf("|              |___/                      \\     /                |\n");
+        printf("|   __  __                                |____/__              |\n");
+        printf("|  |  \\/  | __ _  _ _   __ _  __ _  ___  _ _                     |\n");
+        printf("|  | |\\/| |/ _` || ' \\ / _` |/ _` |/ -_)| '_|                    |\n");
+        printf("|  |_|  |_|\\__,_||_||_|\\__,_|\\__, |\\___||_|                      |\n");
+        printf("|                             |___/                              |\n");
+        printf(".————————————————————————————————————————————————————————————————.\n");
+        printf("License and Copyright @ 2024 - Pranav Kale - pkale@ncsu.edu\n\n");
+}
 /**
     Starting point of program
     @param argv the number of arguments
@@ -51,14 +70,17 @@ int main(int argc, char *argv[]) {
     }
     
     char *command;
-
-    while (true) {
-        const char options[5][50] = {"Show Flight Table - Enter -> list \n", 
+    displayApp();
+    const char options[6][50] = {"Show Flight Table - Enter -> list \n", 
                                      "Show Flight Data - Enter -> status <flight ID>\n",
                                      "Show Airports - Enter -> list airports \n",
                                      "Book your flight - Enter -> book <flight ID> \n", 
-                                     "Quit the Application - Enter -> quit \n"};  
-        displayMenuOptions(options);
+                                     "Quit the Application - Enter -> quit \n",
+                                     "For Help - Enter -> help commands \n"};  
+        
+    displayMenuOptions(options);
+    while (true) {
+        
         printf("cmd> ");
 
         command = readLine(stdin);
@@ -66,19 +88,30 @@ int main(int argc, char *argv[]) {
         if (command == NULL) {
             break;
         } 
+        
+        char flightIdentifier[10];
         if (strcmp(command, "list") == 0) {
             printf("%s\n", command);
             displayFlightTableHeader();
             displayFlightTableRow(fdatab);
 
-        }
+        // } else if (sscanf(command, "status %s[^\n]", flightIdentifier) == 1) {
+        //     printf("status %s\n", flightIdentifier);
+        //     displayFlightData();
+        //     free(command);
+        } else if (strcmp(command, "help commands") == 0) {
+            printf("%s\n\n", command);
+            displayMenuOptions(options);
+        } 
         else if (strcmp(command, "quit") == 0) { 
             printf("%s\n", command);
             free(command);
             break;
         } else {
             printf("%s\n", command);
-            printf("Invalid command\n");
+            printf(".------------------.\n");
+            printf("| Invalid command! |\n");
+            printf(".------------------.\n");
             free(command);
         }
         printf("\n");

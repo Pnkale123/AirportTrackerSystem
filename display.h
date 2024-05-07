@@ -13,7 +13,7 @@ void displayFlightTableRow(FlightDatabase *fdatab);
 void displayFlightTableHeader();
 void clearConsole();
 void displayMenuOptions(const char options[][50]);
-void displaySingleFlightData(const char * flight[]);
+void displaySingleFlightData(FlightDatabase *fdatab, char const *str);
 void displayAllAirports(const char * airports[]);
 
 #endif

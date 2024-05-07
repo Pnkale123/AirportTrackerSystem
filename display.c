@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h> 
+#include <string.h> 
 #include "display.h"
 #include "flights.h"
 
@@ -57,7 +59,7 @@ void clearConsole()
 */
 void displayMenuOptions(const char options[][50]) 
 {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         printf("%s\n", options[i]);
     }
 }
@@ -67,9 +69,22 @@ void displayMenuOptions(const char options[][50])
 *  Includes ID, # of seats, engine type, Plane (Ex. Boeing 777), Pilot, 
 *  Total miles, Total trips, and Operator (Ex.American Airlines)
 */
-void displaySingleFlightData(const char * flight[])
-{
-
+void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
+    bool exists = false;
+    for (int i = 0; i < fdatab->count; i++) {
+        Flight *flight = fdatab->flight[i];
+        if (strcmp(flight->flightID, str) == 0) {
+            exists = true;
+            printf("Flight found:\n");
+            printf("Flight ID: %s\n", flight->flightID);
+            printf("Departure Airport: %s\n", flight->departureAirport);
+            // Add other flight data here if needed
+            break;
+        }
+    }
+    if (!exists) {
+        printf("Unknown Flight ID, please Re-Enter.\n\n");
+    }
 }
 
 /**
