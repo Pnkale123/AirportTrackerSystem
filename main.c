@@ -8,7 +8,8 @@
 #define SUCCESS 0
 #define MAX_FLIGHTS 12
 #define MATCHES2 2
-
+#define EXIT_FAILURE 1
+#define EXIT_SUCCESS 0
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -71,33 +72,35 @@ int main(int argc, char *argv[]) {
     }
     
     char *command;
-    displayApp();
+
     const char options[6][50] = {"Show Flight Table - Enter -> list \n", 
                                      "Show Flight Data - Enter -> status <flight ID>\n",
                                      "Show Airports - Enter -> list airports \n",
                                      "Book your flight - Enter -> book <flight ID> \n", 
                                      "Quit the Application - Enter -> quit \n",
                                      "For Help - Enter -> help commands \n"};  
-        
+    displayApp();
+
     displayMenuOptions(options);
     while (true) {
-        
+       
         printf("cmd> ");
 
         command = readLine(stdin);
-
         if (command == NULL) {
             break;
         } 
         
         char flightIdentifier[10];
         if (strcmp(command, "list") == 0) {
-            printf("%s\n", command);
+            printf("%s", command);
+            printf("ing all flight information : \n\n");
             displayFlightTableHeader();
             displayFlightTableRow(fdatab);
 
         } else if (sscanf(command, "status %s[^\n]", flightIdentifier) == 1) {
             printf("status %s\n", flightIdentifier);
+            putchar('\n');
             displaySingleFlightData(fdatab, flightIdentifier);
             free(command);
         } else if (strcmp(command, "help commands") == 0) {
@@ -105,17 +108,19 @@ int main(int argc, char *argv[]) {
             displayMenuOptions(options);
         } 
         else if (strcmp(command, "quit") == 0) { 
-            printf("%s\n", command);
+            putchar('\n');
             free(command);
             break;
         } else {
-            printf("%s\n", command);
             printf(".------------------.\n");
             printf("| Invalid command! |\n");
-            printf(".------------------.\n");
+            printf(".------------------.\n\n");
+      
+            printf("\nPlease Try Again or Enter \" help commands \" for commands.\n");
             free(command);
         }
         printf("\n");
+        
 
         // switch () {
         //     case 1:
@@ -135,7 +140,7 @@ int main(int argc, char *argv[]) {
         // }
     }
 
-    printf("Exiting the Flight Information App...\n");
+    printf("Exiting the Flight Manager Application...\n\n");
         
     return EXIT_SUCCESS;
 }
@@ -154,11 +159,3 @@ void loadFlightData(const char *filename, FlightDatabase *fdatab) {
     fdatab->flight[fdatab->count++] = newFlight;
     fclose(fp);
 }
-    // for (int i = 0; i < maxFlights; i++) {
-    //     char filename[20];
-    //     snprintf(filename, sizeof(filename), "flight-%d.txt", i + 1);
-    //     if (getData(filename, fdatab->flight, maxFlights) != 0) {
-    //         fprintf(stderr, "Error loading data from %s. Exiting...\n", filename);
-    //         exit(EXIT_FAILURE);
-    //     }
-    // }

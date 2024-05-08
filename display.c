@@ -75,9 +75,33 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
         Flight *flight = fdatab->flight[i];
         if (strcmp(flight->flightID, str) == 0) {
             exists = true;
-            printf("Flight found:\n");
-            printf("Flight ID: %s\n", flight->flightID);
+            printf("Flight found!\n");
+            printf("\n.------------------------------------------------------.\n");
+            int val = 25 - strlen(flight->operator) - strlen(flight->flightID);
+            printf("|%s %s", flight->operator, flight->flightID);
+            for (int i = 0; i < val; i++) {
+                putchar(' ');
+            }
+            printf("|                           |\n");
+            printf("|                          |                           |\n");
+            printf("|                        .-'-.                         |\n");
+            printf("|                       ' === '                        |\n");
+            printf("|                \\-----'  .-.  '-----/                 |\n");
+            printf("|    ——————————————————'  '-'  '————————————————————   |\n");
+            printf("|      '''''-|--/   \\==^'--T--'^==//   \\--|-'''''      |\n");
+            printf("|               \\___/      O       \\___/               |\n");
+            printf("|                                                      |\n");
+            printf(".------------------------------------------------------.\n");
+            printf("\nFlight Departing At: %s\n", flight->departTime);
+            printf("Flight Arriving At: %s\n", flight->arrivalTime);
+            printf("-------------------------\n");
             printf("Departure Airport: %s\n", flight->departureAirport);
+            printf("Arrival Airport: %s\n", flight->arrivalAirport);
+            printf("-------------------------\n");
+            printf("Pilot Name: %s\n", flight->pilot);
+            printf("Seats Available: %d\n", flight->seats);
+            printf("Aircraft Type: %s\n", flight->aircraftType);
+
             // Add other flight data here if needed
             break;
         }
