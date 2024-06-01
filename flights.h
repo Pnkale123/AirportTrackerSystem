@@ -28,7 +28,7 @@ typedef struct {
     char pilot[50];
     double totalMiles;
     int totalTrips;
-    char operator[30];
+    char operatorName[30];
 } Flight;
 
 /**

@@ -103,6 +103,10 @@ int main(int argc, char *argv[]) {
             putchar('\n');
             displaySingleFlightData(fdatab, flightIdentifier);
             free(command);
+        } else if (sscanf(command, "list airports") == 0) {
+            printf("%s\n", command);
+            displayAllAirports(fdatab);
+        
         } else if (strcmp(command, "help commands") == 0) {
             printf("%s\n\n", command);
             displayMenuOptions(options);

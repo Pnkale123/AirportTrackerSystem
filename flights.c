@@ -40,7 +40,7 @@ bool getData(const char * fname, Flight *flight) {
     fscanf(input, "Pilot: %[^\n]\n", flight->pilot);
     fscanf(input, "Total Miles on Plane: %lf\n", &flight->totalMiles);
     fscanf(input, "Total Trips by Plane: %d\n", &flight->totalTrips);
-    fscanf(input, "Operator: %[^\n]\n", flight->operator);
+    fscanf(input, "Operator: %[^\n]\n", flight->operatorName);
     
     fclose(input);
 

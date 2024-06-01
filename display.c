@@ -12,6 +12,40 @@
 #include "display.h"
 #include "flights.h"
 
+// Check if compiled as C++
+#ifdef __cplusplus
+// Include C++ headers
+#include <map>
+#include <string>
+
+// Define the AirportInfo struct
+struct AirportInfo {
+    char name[50];
+    char city[50];
+    char country[50];
+};
+
+// Define the AirportMap type
+typedef std::map<std::string, struct AirportInfo> AirportMap;
+
+// Declare the populateAirportMap function
+extern "C" void populateAirportMap(FlightDatabase *fdatab, AirportMap &airportMap);
+
+// Define the displayAllAirports function
+extern "C" void displayAllAirports(FlightDatabase *fdatab)
+{
+    // Initialize the C++ map
+    AirportMap airportMap;
+    populateAirportMap(fdatab, airportMap);
+    for (const auto &entry : airportMap) {
+        printf("Airport: %s, City: %s, Country: %s\n",
+               entry.first.c_str(),
+               entry.second.city,
+               entry.second.country);
+    }
+}
+#endif
+
 /**
 * Display all the flights as a row in the table based on given 2d array
 * 
@@ -21,7 +55,7 @@ void displayFlightTableRow(FlightDatabase *fdatab)
   for (int i = 0; i < fdatab->count; i++) {
         Flight *flight = fdatab->flight[i];
         printf("| %-21s | %-5s | %-21s | %-10s | %-9s | %-20s |\n",
-               flight->operator,
+               flight->operatorName,
                flight->flightID,
                flight->departureAirport,
                flight->departTime,
@@ -75,10 +109,11 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
         Flight *flight = fdatab->flight[i];
         if (strcmp(flight->flightID, str) == 0) {
             exists = true;
-            printf("Flight found!\n");
+            printf("Flight found!\n\n");
+            printf("[FLIGHT DATE]: %s\n", flight->date);
             printf("\n.------------------------------------------------------.\n");
-            int val = 25 - strlen(flight->operator) - strlen(flight->flightID);
-            printf("|%s %s", flight->operator, flight->flightID);
+            int val = 25 - strlen(flight->operatorName) - strlen(flight->flightID);
+            printf("|%s %s", flight->operatorName, flight->flightID);
             for (int i = 0; i < val; i++) {
                 putchar(' ');
             }
@@ -101,6 +136,7 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
             printf("Pilot Name: %s\n", flight->pilot);
             printf("Seats Available: %d\n", flight->seats);
             printf("Aircraft Type: %s\n", flight->aircraftType);
+            printf("-------------------------\n");
 
             // Add other flight data here if needed
             break;
@@ -109,13 +145,4 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
     if (!exists) {
         printf("Unknown Flight ID, please Re-Enter.\n\n");
     }
-}
-
-/**
-* Displays a table of all airports currently hosted on Application
-* Includes Name of Airport, City, Country
-*/
-void displayAllAirports(const char * airports[])
-{
-    
 }
