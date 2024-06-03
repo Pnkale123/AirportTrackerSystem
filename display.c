@@ -12,39 +12,9 @@
 #include "display.h"
 #include "flights.h"
 
-// Check if compiled as C++
-#ifdef __cplusplus
-// Include C++ headers
-#include <map>
-#include <string>
-
-// Define the AirportInfo struct
-struct AirportInfo {
-    char name[50];
-    char city[50];
-    char country[50];
-};
-
-// Define the AirportMap type
-typedef std::map<std::string, struct AirportInfo> AirportMap;
-
-// Declare the populateAirportMap function
-extern "C" void populateAirportMap(FlightDatabase *fdatab, AirportMap &airportMap);
-
-// Define the displayAllAirports function
-extern "C" void displayAllAirports(FlightDatabase *fdatab)
-{
-    // Initialize the C++ map
-    AirportMap airportMap;
-    populateAirportMap(fdatab, airportMap);
-    for (const auto &entry : airportMap) {
-        printf("Airport: %s, City: %s, Country: %s\n",
-               entry.first.c_str(),
-               entry.second.city,
-               entry.second.country);
-    }
+int compareCountries(const void *a, const void *b) {
+    return strcmp((*(CountryNode **)a)->country, (*(CountryNode **)b)->country);
 }
-#endif
 
 /**
 * Display all the flights as a row in the table based on given 2d array
@@ -145,4 +115,65 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
     if (!exists) {
         printf("Unknown Flight ID, please Re-Enter.\n\n");
     }
+}
+
+void dispAirportHeader() 
+{
+    printf("|     Country     |        Airport        |\n");
+    printf("|-----------------+-----------------------+\n");
+}
+
+void displayAllAirports(FlightDatabase *fdatab) {
+    HashTable *table = createTable(TABLE_SIZE);
+
+    for (int i = 0; i < fdatab->count; i++) {
+        Flight *flight = fdatab->flight[i];
+        insertAirport(table, flight->departureCountry, flight->departureAirport);
+    }
+
+    // Collect all countries into an array for sorting
+    CountryNode *countryArray[table->size];
+    int countryCount = 0;
+
+    for (int i = 0; i < table->size; i++) {
+        CountryNode *node = table->buckets[i];
+        while (node != NULL) {
+            countryArray[countryCount++] = node;
+            node = node->next;
+        }
+    }
+
+    // Sort the array of countries
+    qsort(countryArray, countryCount, sizeof(CountryNode *), compareCountries);
+
+    // Print the sorted list of countries and their airports
+    dispAirportHeader();
+    for (int i = 0; i < countryCount; i++) {
+        CountryNode *countryNode = countryArray[i];
+        AirportNode *airportNode = countryNode->airports;
+        while (airportNode != NULL) {
+            printf("| %-15s | %-21s |\n",
+                   countryNode->country,
+                   airportNode->airport);
+            airportNode = airportNode->next;
+        }
+    }
+
+    // Free the allocated memory
+    for (int i = 0; i < table->size; i++) {
+        CountryNode *countryNode = table->buckets[i];
+        while (countryNode != NULL) {
+            CountryNode *tempCountry = countryNode;
+            AirportNode *airportNode = countryNode->airports;
+            while (airportNode != NULL) {
+                AirportNode *tempAirport = airportNode;
+                airportNode = airportNode->next;
+                free(tempAirport);
+            }
+            countryNode = countryNode->next;
+            free(tempCountry);
+        }
+    }
+    free(table->buckets);
+    free(table);
 }

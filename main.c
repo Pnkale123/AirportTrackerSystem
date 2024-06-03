@@ -92,26 +92,24 @@ int main(int argc, char *argv[]) {
         } 
         
         char flightIdentifier[10];
+
         if (strcmp(command, "list") == 0) {
             printf("%s", command);
             printf("ing all flight information : \n\n");
             displayFlightTableHeader();
             displayFlightTableRow(fdatab);
-
         } else if (sscanf(command, "status %s[^\n]", flightIdentifier) == 1) {
             printf("status %s\n", flightIdentifier);
             putchar('\n');
             displaySingleFlightData(fdatab, flightIdentifier);
             free(command);
-        } else if (sscanf(command, "list airports") == 0) {
-            printf("%s\n", command);
+        } else if (strcmp(command, "list airports") == 0) {
+            printf("%s\n\n", command);
             displayAllAirports(fdatab);
-        
         } else if (strcmp(command, "help commands") == 0) {
             printf("%s\n\n", command);
             displayMenuOptions(options);
-        } 
-        else if (strcmp(command, "quit") == 0) { 
+        } else if (strcmp(command, "quit") == 0) { 
             putchar('\n');
             free(command);
             break;

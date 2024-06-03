@@ -25,6 +25,11 @@ FlightDatabase *makeDatabase()
     return flightdb;
 }
 
+/** 
+* Get all the Data for a Flight Recording 
+* @param fname is the file to open
+* @param flight the flight struct to fill 
+*/
 bool getData(const char * fname, Flight *flight) {
     FILE *input = fopen(fname, "r");
 
@@ -47,6 +52,66 @@ bool getData(const char * fname, Flight *flight) {
     return true;
 }
 
+/**
+* Hashes the string uniquely and returns value
+* @param str the string to hash 
+*/
+unsigned int hash(const char *str) {
+    unsigned int hash = 5381;
+    int c;
+    while ((c = *str++))
+        hash = ((hash << 5) + hash) + c;
+    return hash % TABLE_SIZE;
+}
+
+/**
+* Creates a hash table of given size 
+* Involves the use of buckets to store country nodes and airports
+* @param size the size of the table
+*/
+HashTable *createTable(int size) {
+    HashTable *table = malloc(sizeof(HashTable));
+    table->size = size;
+    table->buckets = calloc(size, sizeof(CountryNode *));
+    return table;
+}
+
+/**
+* Inserts an Airport to a country in the hash table 
+* @param country the country to add an airport to
+* @param airport the airport to check for 
+*/
+void insertAirport(HashTable *table, const char *country, const char *airport) {
+    unsigned int index = hash(country);
+    CountryNode *countryNode = table->buckets[index];
+
+    // Find a valid country node
+    while (countryNode != NULL && strcmp(countryNode->country, country) != 0) {
+        countryNode = countryNode->next;
+    }
+
+    if (countryNode == NULL) {
+        countryNode = malloc(sizeof(CountryNode));
+        strcpy(countryNode->country, country);
+        countryNode->airports = NULL;
+        countryNode->next = table->buckets[index];
+        table->buckets[index] = countryNode;
+    }
+
+    AirportNode *current = countryNode->airports;
+    // Check for duplicate country airports
+    while (current != NULL) {
+        if (strcmp(current->airport, airport) == 0) {
+            return;
+        }
+        current = current->next;
+    }
+    
+    AirportNode *airportNode = malloc(sizeof(AirportNode));
+    strcpy(airportNode->airport, airport);
+    airportNode->next = countryNode->airports;
+    countryNode->airports = airportNode;
+}
 
 double calculateAverageMilesPerFlight(double miles, int trips) {
     double average = (double) miles / trips;
