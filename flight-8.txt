@@ -8,6 +8,6 @@ Flight Arrival Airport: Shanghai Pudong Intl
 Seats: 250
 Aircraft Type: Airbus A330
 Pilot: Captain Dmitri Ivanov
-Total Miles on Plane: 6324891
-Total Trips by Plane: 188
+Total Miles on Plane: 1198722
+Total Trips by Plane: 281
 Operator: Aeroflot Airlines

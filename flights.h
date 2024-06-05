@@ -1,5 +1,7 @@
 /**
 *  Header file for the Flights C program
+*  Provides the Declarations of Methods and Struct(s)
+*  This file is used by other parts of the application
 *  @file flights.h 
 *  @author Pranav Kale
 */
@@ -81,6 +83,18 @@ typedef struct {
 */
 FlightDatabase *makeDatabase();
 
+/**
+    Free the Flight Database to Avoid Memory Leak
+    @param flightdb the database to free
+*/
+void freeFlightDatabase(FlightDatabase *flightdb);
+
+/** 
+    Free the hash table of country / airport data
+    @param table the table to free
+*/
+void freeHashTable(HashTable *table);
+
 /** 
     Get all the data for a flight 
     @param fname to store flights
@@ -88,10 +102,44 @@ FlightDatabase *makeDatabase();
 */
 bool getData(const char fname[], Flight *flight);
 
+/**
+    Unique algorithm to hash provided data 
+    Secure method to store the information
+    @param str the string to hash
+*/
 unsigned int hash(const char *str);
 
+/**
+    Creates a hash table with provided size
+    @param size the size of table 
+    @return a hash table 
+*/
 HashTable *createTable(int size);
 
+/**
+    Calculate all the Average Miles per Flight 
+    Allows customer to know usual flight miles on each travel
+    @param miles the mileage of plane
+    @param trips the # of trips the plane has chartered
+    @return avgMiles the average miles per trip
+*/
+double calculateAverageMilesPerFlight(double miles, int trips);
+
+/**
+    Calculate flight time of this plane
+    @param departTime the time of departure
+    @param arrivalTime the time of arrival
+    @return fTime total flight time 
+*/
+char* calculateFlightTime(const char departTime[], const char arrivalTime[]);
+
+/**
+    Insert an airport into the hash table
+    Use the provided information to traverse the table
+    @param table the table to insert in
+    @param country the country to add
+    @param airport the airport to attach to valid country
+*/
 void insertAirport(HashTable *table, const char *country, const char *airport);
 
 #endif

@@ -8,6 +8,6 @@ Flight Arrival Airport: Vancouver Intl
 Seats: 220
 Aircraft Type: Boeing 787-9 Dreamliner
 Pilot: Captain David Anderson
-Total Miles on Plane: 6321458
+Total Miles on Plane: 569258
 Total Trips by Plane: 198
 Operator: United Airlines

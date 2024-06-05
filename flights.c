@@ -25,6 +25,45 @@ FlightDatabase *makeDatabase()
     return flightdb;
 }
 
+/**
+ * Frees the memory allocated for the flights in the FlightDatabase.
+ * @param flightdb the FlightDatabase to free.
+ */
+void freeFlightDatabase(FlightDatabase *flightdb) {
+    if (flightdb == NULL) {
+        return;
+    } 
+    for (int i = 0; i < flightdb->count; i++) {
+        free(flightdb->flight[i]);
+    }
+    free(flightdb->flight);
+    free(flightdb);
+}
+
+/**
+ * Frees the memory allocated for the country nodes in the HashTable.
+ * @param table the HashTable to free.
+ */
+void freeHashTable(HashTable *table) {
+    // Free the allocated memory
+    for (int i = 0; i < table->size; i++) {
+        CountryNode *countryNode = table->buckets[i];
+        while (countryNode != NULL) {
+            CountryNode *tempCountry = countryNode;
+            AirportNode *airportNode = countryNode->airports;
+            while (airportNode != NULL) {
+                AirportNode *tempAirport = airportNode;
+                airportNode = airportNode->next;
+                free(tempAirport);
+            }
+            countryNode = countryNode->next;
+            free(tempCountry);
+        }
+    }
+    free(table->buckets);
+    free(table);
+}
+
 /** 
 * Get all the Data for a Flight Recording 
 * @param fname is the file to open
@@ -55,12 +94,14 @@ bool getData(const char * fname, Flight *flight) {
 /**
 * Hashes the string uniquely and returns value
 * @param str the string to hash 
+* @return hashed value 
 */
 unsigned int hash(const char *str) {
     unsigned int hash = 5381;
     int c;
-    while ((c = *str++))
+    while ((c = *str++)) {
         hash = ((hash << 5) + hash) + c;
+    }
     return hash % TABLE_SIZE;
 }
 

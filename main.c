@@ -10,6 +10,7 @@
 #define MATCHES2 2
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,10 +21,6 @@
 // Function prototype
 void loadFlightData(const char *filename, FlightDatabase *fdatab);
 
-void displayFlightData(Flight *flight) {
-    printf("Flight ID: %s\n", flight->flightID);
-    printf("Departure Airport: %s\n", flight->departureAirport);
-}
 /**
 * Prints a message when program is given invalid arguments 
 */
@@ -33,26 +30,6 @@ static void usage()
     exit(EXIT_FAILURE);
 }
 
-void displayApp() {
-    printf("\n.————————————————————————————————————————————————————————————————.\n");
-        printf("|  __       __     __                         __                 |\n");
-        printf("|  \\ \\     / /___ | | __  ___  _ __   ___    | |_  ___           |\n");
-        printf("|   \\ \\//\\/ // -_)| |/ _|/ _ \\| '  \\ / -_)   |  _|/ _ \\          |\n");
-        printf("|    \\_//\\_/ \\___||_|\\__|\\___/|_|_|_|\\___|    \\__|\\___/          |\n");
-        printf("|                                 _____                          |\n");
-        printf("|   ___  _  _        _    _       |  \\                           |\n");
-        printf("|  | __|| |(_) __ _ | |_ | |_     |   \\_________________         |\n");
-        printf("|  | _| | || |/ _` || ' \\|  _|    |______         \\_____\\___     |\n");
-        printf("|  |_|  |_||_|\\__, ||_||_|\\__|     \\____/__,-------,________)    |\n");
-        printf("|              |___/                      \\     /                |\n");
-        printf("|   __  __                                |____/__               |\n");
-        printf("|  |  \\/  | __ _  _ _   __ _  __ _  ___  _ _                     |\n");
-        printf("|  | |\\/| |/ _` || ' \\ / _` |/ _` |/ -_)| '_|                    |\n");
-        printf("|  |_|  |_|\\__,_||_||_|\\__,_|\\__, |\\___||_|                      |\n");
-        printf("|                             |___/                              |\n");
-        printf(".————————————————————————————————————————————————————————————————.\n");
-        printf("License and Copyright @ 2024 - Pranav Kale - pkale@ncsu.edu\n\n");
-}
 /**
     Starting point of program
     @param argv the number of arguments
@@ -73,6 +50,8 @@ int main(int argc, char *argv[]) {
     
     char *command;
 
+    displayApp();
+    
     const char options[6][50] = {"Show Flight Table - Enter -> list \n", 
                                      "Show Flight Data - Enter -> status <flight ID>\n",
                                      "Show Airports - Enter -> list airports \n",
@@ -107,7 +86,7 @@ int main(int argc, char *argv[]) {
             printf("%s\n\n", command);
             displayAllAirports(fdatab);
         } else if (strcmp(command, "help commands") == 0) {
-            printf("%s\n\n", command);
+            printf("\n\n");
             displayMenuOptions(options);
         } else if (strcmp(command, "quit") == 0) { 
             putchar('\n');
@@ -123,30 +102,18 @@ int main(int argc, char *argv[]) {
         }
         printf("\n");
         
-
-        // switch () {
-        //     case 1:
-        //         // showFlightTable(flights, MAX_FLIGHTS);
-        //         break;
-        //     case 2:
-        //         // showFlightData(flights, MAX_FLIGHTS);
-        //         break;
-        //     case 3:
-        //         // showAirports(flights, MAX_FLIGHTS);
-        //         break;
-        //     case 4:
-        //         shouldQuit = 1;
-        //         break;
-        //     default:
-        //         break;
-        // }
     }
-
+    freeFlightDatabase(fdatab);
     printf("Exiting the Flight Manager Application...\n\n");
         
     return EXIT_SUCCESS;
 }
 
+/**
+    Load the necessary flight data into the provided database using the given file
+    @param filename the file to read
+    @param fdatab the database to add flight information into
+*/
 void loadFlightData(const char *filename, FlightDatabase *fdatab) {
     FILE *fp = fopen(filename, "r");
     if (fp == NULL) {

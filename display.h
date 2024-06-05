@@ -16,6 +16,6 @@ void clearConsole();
 void displayMenuOptions(const char options[][50]);
 void displaySingleFlightData(FlightDatabase *fdatab, char const *str);
 void displayAllAirports(FlightDatabase *fdatab);
-
+void displayApp();
 
 #endif

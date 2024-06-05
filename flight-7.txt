@@ -8,6 +8,6 @@ Flight Arrival Airport: John F. Kennedy Intl
 Seats: 240
 Aircraft Type: Airbus A380
 Pilot: Captain Sofia Al-Farsi
-Total Miles on Plane: 5629378
-Total Trips by Plane: 175
+Total Miles on Plane: 1398432
+Total Trips by Plane: 256
 Operator: Etihad Airways

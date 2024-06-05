@@ -8,7 +8,7 @@ main.o: main.c flights.h display.h input.h
 
 flights.o: flights.c flights.h
 
-display.o: display.c display.h
+display.o: display.c display.h input.h
 
 input.o: input.c input.h
 

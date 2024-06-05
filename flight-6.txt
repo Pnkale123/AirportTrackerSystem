@@ -8,6 +8,6 @@ Flight Arrival Airport: Los Angeles Intl
 Seats: 280
 Aircraft Type: Boeing 787-9 Dreamliner
 Pilot: Captain Liam Foster
-Total Miles on Plane: 6938247
+Total Miles on Plane: 1155760
 Total Trips by Plane: 198
 Operator: Qantas Airways

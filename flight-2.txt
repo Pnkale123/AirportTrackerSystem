@@ -8,6 +8,6 @@ Flight Arrival Airport: London Heathrow Intl
 Seats: 300
 Aircraft Type: Airbus A380
 Pilot: Captain Aisha Malik
-Total Miles on Plane: 9876543
-Total Trips by Plane: 150
+Total Miles on Plane: 605677
+Total Trips by Plane: 190
 Operator: Emirates Airlines

@@ -11,6 +11,7 @@
 #include <string.h> 
 #include "display.h"
 #include "flights.h"
+#include "input.h"
 
 int compareCountries(const void *a, const void *b) {
     return strcmp((*(CountryNode **)a)->country, (*(CountryNode **)b)->country);
@@ -107,8 +108,26 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
             printf("Seats Available: %d\n", flight->seats);
             printf("Aircraft Type: %s\n", flight->aircraftType);
             printf("-------------------------\n");
+            printf("\nEnter \" more data \" for additional information.\n\n");
+            while (true) {
+                printf("cmd> ");
+                char *command;
+                command = readLine(stdin);
+                if (command == NULL) {
+                    break;
+                } 
 
-            // Add other flight data here if needed
+                if (strcmp(command, "more data") == 0) {
+                    printf("%s\n\n", command);
+                    double avgMile = calculateAverageMilesPerFlight(flight->totalMiles, flight->totalTrips);
+                    char *fTime = calculateFlightTime(flight->departTime, flight->arrivalTime);
+                    printf(" This plane's average miles per trip: %f\n ", avgMile);
+                    printf(" Total Travel time is %s\n", fTime);
+                }
+
+                break;
+            }
+
             break;
         }
     }
@@ -159,21 +178,26 @@ void displayAllAirports(FlightDatabase *fdatab) {
         }
     }
 
-    // Free the allocated memory
-    for (int i = 0; i < table->size; i++) {
-        CountryNode *countryNode = table->buckets[i];
-        while (countryNode != NULL) {
-            CountryNode *tempCountry = countryNode;
-            AirportNode *airportNode = countryNode->airports;
-            while (airportNode != NULL) {
-                AirportNode *tempAirport = airportNode;
-                airportNode = airportNode->next;
-                free(tempAirport);
-            }
-            countryNode = countryNode->next;
-            free(tempCountry);
-        }
-    }
-    free(table->buckets);
-    free(table);
+    freeHashTable(table);
+}
+
+void displayApp() {
+    printf("\n.————————————————————————————————————————————————————————————————.\n");
+        printf("|  __       __     __                         __                 |\n");
+        printf("|  \\ \\     / /___ | | __  ___  _ __   ___    | |_  ___           |\n");
+        printf("|   \\ \\//\\/ // -_)| |/ _|/ _ \\| '  \\ / -_)   |  _|/ _ \\          |\n");
+        printf("|    \\_//\\_/ \\___||_|\\__|\\___/|_|_|_|\\___|    \\__|\\___/          |\n");
+        printf("|                                 _____                          |\n");
+        printf("|   ___  _  _        _    _       |  \\                           |\n");
+        printf("|  | __|| |(_) __ _ | |_ | |_     |   \\_________________         |\n");
+        printf("|  | _| | || |/ _` || ' \\|  _|    |______         \\_____\\___     |\n");
+        printf("|  |_|  |_||_|\\__, ||_||_|\\__|     \\____/__,-------,________)    |\n");
+        printf("|              |___/                      \\     /                |\n");
+        printf("|   __  __                                |____/__               |\n");
+        printf("|  |  \\/  | __ _  _ _   __ _  __ _  ___  _ _                     |\n");
+        printf("|  | |\\/| |/ _` || ' \\ / _` |/ _` |/ -_)| '_|                    |\n");
+        printf("|  |_|  |_|\\__,_||_||_|\\__,_|\\__, |\\___||_|                      |\n");
+        printf("|                             |___/                              |\n");
+        printf(".————————————————————————————————————————————————————————————————.\n");
+        printf("License and Copyright @ 2024 - Pranav Kale - pkale@ncsu.edu\n\n");
 }

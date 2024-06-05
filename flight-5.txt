@@ -8,6 +8,6 @@ Flight Arrival Airport: Chicago O'Hare Intl
 Seats: 200
 Aircraft Type: Boeing 777-300ER
 Pilot: Captain Emily Johnson
-Total Miles on Plane: 7654321
-Total Trips by Plane: 287
+Total Miles on Plane: 413631
+Total Trips by Plane: 421
 Operator: Delta Airlines

@@ -8,6 +8,6 @@ Flight Arrival Airport: John F. Kennedy Intl
 Seats: 230
 Aircraft Type: Airbus A340
 Pilot: Captain Anna Schmidt
-Total Miles on Plane: 8642013
-Total Trips by Plane: 180
+Total Miles on Plane: 691578
+Total Trips by Plane: 213
 Operator: Lufthansa

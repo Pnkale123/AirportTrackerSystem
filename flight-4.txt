@@ -8,6 +8,6 @@ Flight Arrival Airport: Miami Intl
 Seats: 180
 Aircraft Type: Boeing 737-800
 Pilot: Captain Samantha Miller
-Total Miles on Plane: 8765432
-Total Trips by Plane: 215
+Total Miles on Plane: 412355
+Total Trips by Plane: 297
 Operator: American Airlines
