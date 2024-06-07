@@ -8,6 +8,6 @@ Flight Arrival Airport: Denver Intl
 Seats: 220
 Aircraft Type: Airbus A321neo
 Pilot: Captain Ethan Turner
-Total Miles on Plane: 3165892
-Total Trips by Plane: 170
+Total Miles on Plane: 476429
+Total Trips by Plane: 202
 Operator: Frontier Airlines

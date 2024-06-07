@@ -8,6 +8,6 @@ Flight Arrival Airport: Seoul Incheon Intl
 Seats: 280
 Aircraft Type: Airbus A380
 Pilot: Captain Mei Lin
-Total Miles on Plane: 5748123
-Total Trips by Plane: 215
+Total Miles on Plane: 995337
+Total Trips by Plane: 286
 Operator: Emirates Airlines

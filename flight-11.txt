@@ -8,6 +8,6 @@ Flight Arrival Airport: Seattle-Tacoma Intl
 Seats: 230
 Aircraft Type: Boeing 737-800
 Pilot: Captain Harper Mitchell
-Total Miles on Plane: 2987654
-Total Trips by Plane: 165
+Total Miles on Plane: 523432
+Total Trips by Plane: 234
 Operator: Frontier Airlines

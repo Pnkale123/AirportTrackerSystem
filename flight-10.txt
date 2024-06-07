@@ -8,6 +8,6 @@ Flight Arrival Airport: Denver Intl
 Seats: 200
 Aircraft Type: Airbus A320
 Pilot: Captain Olivia Johnson
-Total Miles on Plane: 3765412
-Total Trips by Plane: 180
+Total Miles on Plane: 279320
+Total Trips by Plane: 312
 Operator: American Airlines
