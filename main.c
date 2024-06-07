@@ -14,12 +14,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "flights.h"
 #include "display.h"
 #include "input.h"
+#include "main.h"
 
-// Function prototype
+// Function prototypes
 void loadFlightData(const char *filename, FlightDatabase *fdatab);
+void collectData(const char *booking, Booking *bookingInfo);
+void bookFlight(FlightDatabase *fdatab);
 
 /**
 * Prints a message when program is given invalid arguments 
@@ -44,7 +48,7 @@ int main(int argc, char *argv[]) {
     FlightDatabase *fdatab = makeDatabase();
 
     // Debugging
-    for (int i = 1; i < argc; i++) {
+    for (int i = 2; i < argc; i++) {
         loadFlightData(argv[i], fdatab);
     }
     
@@ -77,17 +81,24 @@ int main(int argc, char *argv[]) {
             printf("ing all flight information : \n\n");
             displayFlightTableHeader();
             displayFlightTableRow(fdatab);
+            free(command);
         } else if (sscanf(command, "status %s[^\n]", flightIdentifier) == 1) {
             printf("status %s\n", flightIdentifier);
             putchar('\n');
             displaySingleFlightData(fdatab, flightIdentifier);
             free(command);
+        } else if (strcmp(command, "book") == 0) {
+            printf("booking your flight...\n\n");
+            bookFlight(fdatab);
+            free(command);
         } else if (strcmp(command, "list airports") == 0) {
             printf("%s\n\n", command);
             displayAllAirports(fdatab);
+            free(command);
         } else if (strcmp(command, "help commands") == 0) {
             printf("\n\n");
             displayMenuOptions(options);
+            free(command);
         } else if (strcmp(command, "quit") == 0) { 
             putchar('\n');
             free(command);
@@ -128,3 +139,164 @@ void loadFlightData(const char *filename, FlightDatabase *fdatab) {
     fdatab->flight[fdatab->count++] = newFlight;
     fclose(fp);
 }
+
+/**
+ * Function to convert a string to uppercase
+ */
+void toUpperCase(char *str) {
+    for (int i = 0; str[i]; i++) {
+        str[i] = toupper(str[i]);
+    }
+}
+
+/**
+ * Function to get a random itinerary number
+ */
+void generateItineraryNumber(char *itineraryNumber) {
+    const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    itineraryNumber[0] = '#';
+    for (int i = 1; i < 6; i++) {
+        int key = rand() % (int)(sizeof(charset) - 1);
+        itineraryNumber[i] = charset[key];
+    }
+    itineraryNumber[6] = '\0';
+}
+
+/**
+    Collects booking data from the user
+    @param booking the flight ID to book
+    @param bookingInfo the struct to store booking information
+*/
+void collectData(const char *booking, Booking *bookingInfo) {
+    printf("\nHello, please Enter your Name: \n\n");
+    printf("cmd> ");
+    fgets(bookingInfo->name, 50, stdin);
+    bookingInfo->name[strcspn(bookingInfo->name, "\n")] = 0; 
+
+    printf("\nWhich Class Seat would you like? (First, Premium, or Economy) \n\n");
+    printf("cmd> ");
+    char classInput[10];
+    fgets(classInput, 10, stdin);
+    classInput[strcspn(classInput, "\n")] = 0;
+
+    toUpperCase(classInput);
+
+    if (strcmp(classInput, "FIRST") == 0) {
+        bookingInfo->userClass = FIRST;
+    } else if (strcmp(classInput, "PREMIUM") == 0) {
+        bookingInfo->userClass = PREMIUM;
+    } else {
+        bookingInfo->userClass = ECONOMY;
+    }
+
+    generateItineraryNumber(bookingInfo->itineraryNumber);
+
+    printf("\nEnter your Date of Birth (YYYY-MM-DD): ");
+    printf("cmd> ");
+    fgets(bookingInfo->dateOfBirth, 11, stdin);
+    bookingInfo->dateOfBirth[strcspn(bookingInfo->dateOfBirth, "\n")] = 0;  // Remove newline
+
+    printf("\nAny special requests? (None, Animal, ExtraMeal, ExtraSeat, Vegetarian, Vegan, Veteran):  \n\n");
+    printf("cmd> ");
+    char requestInput[15];
+    fgets(requestInput, 15, stdin);
+    requestInput[strcspn(requestInput, "\n")] = 0;  
+    toUpperCase(requestInput);
+
+    if (strcmp(requestInput, "ANIMAL") == 0) {
+        bookingInfo->specialRequest = ANIMAL;
+    } else if (strcmp(requestInput, "EXTRAMEAL") == 0) {
+        bookingInfo->specialRequest = XTRAMEAL;
+    } else if (strcmp(requestInput, "EXTRASEAT") == 0) {
+        bookingInfo->specialRequest = XTRASEAT;
+    } else if (strcmp(requestInput, "VEGETARIAN") == 0) {
+        bookingInfo->specialRequest = VEGETARIAN;
+    } else if (strcmp(requestInput, "VEGAN") == 0) {
+        bookingInfo->specialRequest = VEGAN;
+    } else if (strcmp(requestInput, "VETERAN") == 0) {
+        bookingInfo->specialRequest = VETERAN;
+    } else if (strcmp(requestInput, "OTHER") == 0) {
+        bookingInfo->specialRequest = OTHER;
+    } else {
+        bookingInfo->specialRequest = NONE;
+    }
+}
+
+
+/**
+    Books a flight for the user
+    @param fdatab the flight database
+*/
+void bookFlight(FlightDatabase *fdatab) {
+    Booking bookingInfo;
+    char flightID[10];
+
+    printf("Enter the Flight ID to book: ");
+
+    fgets(flightID, 10, stdin);
+    flightID[strcspn(flightID, "\n")] = 0;
+
+    bool found = false;
+    for (int i = 0; i < fdatab->count; i++) {
+        Flight *flight = fdatab->flight[i];
+        if (strcmp(flight->flightID, flightID) == 0) {
+            found = true;
+        }
+    }
+    if (!found) {
+        printf("Oops! This flight was not found in our database. Try again!\n");
+    } else {
+        collectData(flightID, &bookingInfo);
+
+        printf("\n\nBooking confirmed for %s on flight %s\n", bookingInfo.name, flightID);
+        printf("Itinerary Number: %s\n", bookingInfo.itineraryNumber);
+        printf("Class: %s\n", (bookingInfo.userClass == FIRST) ? "First" : (bookingInfo.userClass == PREMIUM) ? "Premium" : "Economy");
+        printf("Date of Birth: %s\n", bookingInfo.dateOfBirth);
+        printf("Special Request: %s\n", 
+            (bookingInfo.specialRequest == NONE) ? "None" : 
+            (bookingInfo.specialRequest == ANIMAL) ? "Animal" : 
+            (bookingInfo.specialRequest == XTRAMEAL) ? "Extra Meal" : 
+            (bookingInfo.specialRequest == XTRASEAT) ? "Extra Seat" : 
+            (bookingInfo.specialRequest == VEGETARIAN) ? "Vegetarian" : 
+            (bookingInfo.specialRequest == VEGAN) ? "Vegan" : "Veteran"
+        );
+
+    }
+}
+
+// void collectData(const char * booking) {
+//     printf("\nHello, please Enter your Name: \n");
+//     printf("cmd> ");
+//     char * read;
+//     read = readLine(stdin);
+//     char name[15];
+//     attempt: 
+//         if (sscanf(read, "%s[^\n]", name) == 1) {
+
+//         } else {
+//             free(read);
+//             print("That was wrong, try again!")
+//             goto attempt
+//         }
+
+    
+//     Class userClass;
+//     free(read)
+//     printf("\nWhich Class Seat would you like? (First, Premium, or Economy)");
+//     read = readLine(stdin);
+//     attempt2:
+//         if (sscanf(read, "%s[^\n]", userClass.toUpper()) == 1) {
+
+//         } else {
+//             free(read);
+//             print("That was wrong, try again!")
+//             goto attempt2
+//         }
+
+//     // Generate a random 6 digit itinerary number using the random library starting with #. for example #5ADF32
+//     // Also need to collect date of birth 
+//     // Last thing to collect is a special request. This should be another enummeration Dietary restrictions, mobility, and any special service requests (SSRs). 
+//     // SSRs are four-character codes that identify extra services, such as extra seats, meals, or bringing animals on board. you could do ANIMAL, XTRAMEAL, XTRASEAT, VEGETARIAN, VEGAN, VETERAN
+
+    
+// }

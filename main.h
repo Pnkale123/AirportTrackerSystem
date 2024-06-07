@@ -5,3 +5,32 @@
 */
 
 #ifndef MAIN_H
+#define MAIN_H
+
+typedef enum {
+  FIRST,
+  PREMIUM,
+  ECONOMY
+} Class;
+
+typedef enum {
+    NONE,
+    ANIMAL,
+    XTRAMEAL,
+    XTRASEAT,
+    VEGETARIAN,
+    VEGAN,
+    VETERAN,
+    OTHER
+} SpecialRequest;
+
+typedef struct {
+    char name[50];
+    Class userClass;
+    char itineraryNumber[7];
+    char dateOfBirth[11];
+    SpecialRequest specialRequest;
+} Booking;
+
+
+#endif 
