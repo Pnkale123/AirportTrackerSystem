@@ -62,7 +62,6 @@ int main(int argc, char *argv[]) {
                                      "Book your flight - Enter -> book <flight ID> \n", 
                                      "Quit the Application - Enter -> quit \n",
                                      "For Help - Enter -> help commands \n"};  
-    displayApp();
 
     displayMenuOptions(options);
     while (true) {
@@ -162,6 +161,17 @@ void generateItineraryNumber(char *itineraryNumber) {
     itineraryNumber[6] = '\0';
 }
 
+bool isValidDate(const char *date) {
+    int year, month, day;
+    if (sscanf(date, "%4d-%2d-%2d", &year, &month, &day) != 3) {
+        return false;
+    }
+    // Additional checks can be added for month and day range validation
+    if (year < 1900 || year > 2100 || month < 1 || month > 12 || day < 1 || day > 31) {
+        return false;
+    }
+    return true;
+}
 /**
     Collects booking data from the user
     @param booking the flight ID to book
@@ -170,15 +180,12 @@ void generateItineraryNumber(char *itineraryNumber) {
 void collectData(const char *booking, Booking *bookingInfo) {
     printf("\nHello, please Enter your Name: \n\n");
     printf("cmd> ");
-    fgets(bookingInfo->name, 50, stdin);
-    bookingInfo->name[strcspn(bookingInfo->name, "\n")] = 0; 
+    scanf("%s[^\n]", bookingInfo->name);
 
     printf("\nWhich Class Seat would you like? (First, Premium, or Economy) \n\n");
     printf("cmd> ");
     char classInput[10];
-    fgets(classInput, 10, stdin);
-    classInput[strcspn(classInput, "\n")] = 0;
-
+    scanf("%s[^\n]", classInput);
     toUpperCase(classInput);
 
     if (strcmp(classInput, "FIRST") == 0) {
@@ -191,16 +198,15 @@ void collectData(const char *booking, Booking *bookingInfo) {
 
     generateItineraryNumber(bookingInfo->itineraryNumber);
 
-    printf("\nEnter your Date of Birth (YYYY-MM-DD): ");
-    printf("cmd> ");
-    fgets(bookingInfo->dateOfBirth, 11, stdin);
-    bookingInfo->dateOfBirth[strcspn(bookingInfo->dateOfBirth, "\n")] = 0;  // Remove newline
+    do {
+        printf("\nEnter your Date of Birth (YYYY-MM-DD): ");
+        scanf("%s[^\n]", bookingInfo->dateOfBirth);
+    } while (!isValidDate(bookingInfo->dateOfBirth));
 
     printf("\nAny special requests? (None, Animal, ExtraMeal, ExtraSeat, Vegetarian, Vegan, Veteran):  \n\n");
     printf("cmd> ");
     char requestInput[15];
-    fgets(requestInput, 15, stdin);
-    requestInput[strcspn(requestInput, "\n")] = 0;  
+    scanf("%s[^\n]", requestInput);
     toUpperCase(requestInput);
 
     if (strcmp(requestInput, "ANIMAL") == 0) {
@@ -248,7 +254,7 @@ void bookFlight(FlightDatabase *fdatab) {
     } else {
         collectData(flightID, &bookingInfo);
 
-        printf("\n\nBooking confirmed for %s on flight %s\n", bookingInfo.name, flightID);
+        printf("\nBooking confirmed for %s on flight %s\n", bookingInfo.name, flightID);
         printf("Itinerary Number: %s\n", bookingInfo.itineraryNumber);
         printf("Class: %s\n", (bookingInfo.userClass == FIRST) ? "First" : (bookingInfo.userClass == PREMIUM) ? "Premium" : "Economy");
         printf("Date of Birth: %s\n", bookingInfo.dateOfBirth);
