@@ -111,20 +111,16 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
             printf("\nEnter \" more data \" for additional information.\n\n");
             while (true) {
                 printf("cmd> ");
-                char *command;
-                command = readLine(stdin);
-                if (command == NULL) {
-                    break;
-                } 
-
-                if (strcmp(command, "more data") == 0) {
-                    printf("%s\n\n", command);
+                char * adding;
+                adding = readLine(stdin);
+                if (strcmp(adding, "more data") == 0) {
+                   
                     double avgMile = calculateAverageMilesPerFlight(flight->totalMiles, flight->totalTrips);
                     char *fTime = calculateFlightTime(flight->departTime, flight->arrivalTime);
-                    printf(" This plane's average miles per trip: %f\n ", avgMile);
-                    printf(" Total Travel time is %s\n", fTime);
+                    printf("\nThis plane's average miles per trip: %.2f miles\n", avgMile);
+                    printf("Total Travel Duration is %s\n", fTime);
+                    free(fTime); // Freeing the allocated memory
                 }
-
                 break;
             }
 

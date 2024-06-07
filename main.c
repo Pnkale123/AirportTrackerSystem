@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     const char options[6][50] = {"Show Flight Table - Enter -> list \n", 
                                      "Show Flight Data - Enter -> status <flight ID>\n",
                                      "Show Airports - Enter -> list airports \n",
-                                     "Book your flight - Enter -> book <flight ID> \n", 
+                                     "Book your flight - Enter -> book \n", 
                                      "Quit the Application - Enter -> quit \n",
                                      "For Help - Enter -> help commands \n"};  
 
@@ -205,8 +205,8 @@ void collectData(const char *booking, Booking *bookingInfo) {
 
     printf("\nAny special requests? (None, Animal, ExtraMeal, ExtraSeat, Vegetarian, Vegan, Veteran):  \n\n");
     printf("cmd> ");
-    char requestInput[15];
-    scanf("%s[^\n]", requestInput);
+    char * requestInput;
+    requestInput = readLine(stdin);
     toUpperCase(requestInput);
 
     if (strcmp(requestInput, "ANIMAL") == 0) {
