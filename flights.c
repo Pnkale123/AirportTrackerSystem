@@ -45,7 +45,6 @@ void freeFlightDatabase(FlightDatabase *flightdb) {
  * @param table the HashTable to free.
  */
 void freeHashTable(HashTable *table) {
-    // Free the allocated memory
     for (int i = 0; i < table->size; i++) {
         CountryNode *countryNode = table->buckets[i];
         while (countryNode != NULL) {
@@ -140,7 +139,7 @@ void insertAirport(HashTable *table, const char *country, const char *airport) {
     }
 
     AirportNode *current = countryNode->airports;
-    // Check for duplicate country airports
+
     while (current != NULL) {
         if (strcmp(current->airport, airport) == 0) {
             return;

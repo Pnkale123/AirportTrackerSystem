@@ -25,7 +25,8 @@ typedef enum {
 } SpecialRequest;
 
 typedef struct {
-    char name[50];
+    char first[20];
+    char last[20];
     Class userClass;
     char itineraryNumber[7];
     char dateOfBirth[11];

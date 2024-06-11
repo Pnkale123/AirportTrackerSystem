@@ -124,10 +124,10 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
                 if (strcmp(adding, "more data") == 0) {
                     double avgMile = calculateAverageMilesPerFlight(flight->totalMiles, flight->totalTrips);
                     char *fTime = calculateFlightTime(flight->departTime, flight->arrivalTime);
-                    double earnings = calculateTotalRevenue(flight->seats, 409.99)
-                    printf("\nThis plane's average miles per trip: %.2f miles\n", avgMile);
-                    printf("Total Travel Duration is %s\n", fTime);
-                    printf("Total Expected Earnings: %f\n", earnings);
+                    double earnings = calculateTotalRevenue(flight->seats, 409.99);
+                    printf("\nThis plane's average miles per trip --> %.2f miles\n", avgMile);
+                    printf("Total Travel Duration --> %s\n", fTime);
+                    printf("Total Expected Earnings --> $%.2f\n", earnings);
                     free(fTime);
                 }
                 break;

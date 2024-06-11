@@ -23,7 +23,7 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str);
     Display all available airports in the current flight database
     @param fdatab the database to check 
 */
-void displayAllAirports(FlightDatabase *fdatab) 
+void displayAllAirports(FlightDatabase *fdatab); 
 void displayApp();
 
 #endif

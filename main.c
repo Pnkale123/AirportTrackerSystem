@@ -178,9 +178,12 @@ bool isValidDate(const char *date) {
     @param bookingInfo the struct to store booking information
 */
 void collectData(const char *booking, Booking *bookingInfo) {
-    printf("\nHello, please Enter your Name: \n\n");
+    printf("\nHello, please Enter your First Name: \n\n");
     printf("cmd> ");
-    scanf("%s[^\n]", bookingInfo->name);
+    scanf("%s[^\n]", bookingInfo->first);
+    printf("Please Enter your Last Name: \n\n");
+    printf("cmd> ");
+    scanf("%s[^\n]", bookingInfo->last);
 
     printf("\nWhich Class Seat would you like? (First, Premium, or Economy) \n\n");
     printf("cmd> ");
@@ -205,8 +208,8 @@ void collectData(const char *booking, Booking *bookingInfo) {
 
     printf("\nAny special requests? (None, Animal, ExtraMeal, ExtraSeat, Vegetarian, Vegan, Veteran):  \n\n");
     printf("cmd> ");
-    char * requestInput;
-    requestInput = readLine(stdin);
+    char requestInput[12];
+    scanf("%s[^\n]", requestInput);
     toUpperCase(requestInput);
 
     if (strcmp(requestInput, "ANIMAL") == 0) {
@@ -253,8 +256,7 @@ void bookFlight(FlightDatabase *fdatab) {
         printf("Oops! This flight was not found in our database. Try again!\n");
     } else {
         collectData(flightID, &bookingInfo);
-
-        printf("\nBooking confirmed for %s on flight %s\n", bookingInfo.name, flightID);
+        printf("\nBooking confirmed for %s %s on flight %s\n", bookingInfo.first, bookingInfo.last, flightID);
         printf("Itinerary Number: %s\n", bookingInfo.itineraryNumber);
         printf("Class: %s\n", (bookingInfo.userClass == FIRST) ? "First" : (bookingInfo.userClass == PREMIUM) ? "Premium" : "Economy");
         printf("Date of Birth: %s\n", bookingInfo.dateOfBirth);
@@ -269,40 +271,3 @@ void bookFlight(FlightDatabase *fdatab) {
 
     }
 }
-
-// void collectData(const char * booking) {
-//     printf("\nHello, please Enter your Name: \n");
-//     printf("cmd> ");
-//     char * read;
-//     read = readLine(stdin);
-//     char name[15];
-//     attempt: 
-//         if (sscanf(read, "%s[^\n]", name) == 1) {
-
-//         } else {
-//             free(read);
-//             print("That was wrong, try again!")
-//             goto attempt
-//         }
-
-    
-//     Class userClass;
-//     free(read)
-//     printf("\nWhich Class Seat would you like? (First, Premium, or Economy)");
-//     read = readLine(stdin);
-//     attempt2:
-//         if (sscanf(read, "%s[^\n]", userClass.toUpper()) == 1) {
-
-//         } else {
-//             free(read);
-//             print("That was wrong, try again!")
-//             goto attempt2
-//         }
-
-//     // Generate a random 6 digit itinerary number using the random library starting with #. for example #5ADF32
-//     // Also need to collect date of birth 
-//     // Last thing to collect is a special request. This should be another enummeration Dietary restrictions, mobility, and any special service requests (SSRs). 
-//     // SSRs are four-character codes that identify extra services, such as extra seats, meals, or bringing animals on board. you could do ANIMAL, XTRAMEAL, XTRASEAT, VEGETARIAN, VEGAN, VETERAN
-
-    
-// }
