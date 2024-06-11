@@ -256,7 +256,8 @@ void bookFlight(FlightDatabase *fdatab) {
         printf("Oops! This flight was not found in our database. Try again!\n");
     } else {
         collectData(flightID, &bookingInfo);
-        printf("\nBooking confirmed for %s %s on flight %s\n", bookingInfo.first, bookingInfo.last, flightID);
+        printf("\n+----------------------------------------------------+\n");
+        printf("Booking confirmed for %s %s on flight %s\n", bookingInfo.first, bookingInfo.last, flightID);
         printf("Itinerary Number: %s\n", bookingInfo.itineraryNumber);
         printf("Class: %s\n", (bookingInfo.userClass == FIRST) ? "First" : (bookingInfo.userClass == PREMIUM) ? "Premium" : "Economy");
         printf("Date of Birth: %s\n", bookingInfo.dateOfBirth);
@@ -268,6 +269,7 @@ void bookFlight(FlightDatabase *fdatab) {
             (bookingInfo.specialRequest == VEGETARIAN) ? "Vegetarian" : 
             (bookingInfo.specialRequest == VEGAN) ? "Vegan" : "Veteran"
         );
+        printf("+----------------------------------------------------+\n");
 
     }
 }
