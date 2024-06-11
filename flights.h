@@ -134,6 +134,12 @@ double calculateAverageMilesPerFlight(double miles, int trips);
 char* calculateFlightTime(const char departTime[], const char arrivalTime[]);
 
 /**
+* Calculate the total revenue of the flight
+* Take the number of seats and multiply by fixed price
+*/
+double calculateTotalRevenue(int numSeats, double pricePerSeat);
+
+/**
     Insert an airport into the hash table
     Use the provided information to traverse the table
     @param table the table to insert in

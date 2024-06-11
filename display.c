@@ -1,6 +1,7 @@
 /**
 *  Handles functions related to displaying information on the console.
 *  This could include functions for printing tables and data information.
+*
 *  @file Display.c 
 *  @author Pranav Kale pkale 
 */
@@ -13,6 +14,13 @@
 #include "flights.h"
 #include "input.h"
 
+/**
+    Compare countries a and b 
+    This method is used as a comparator for the QSort() method
+    @param a void constant pointer to first country
+    @param b void constant pointer to second country
+    @return string comparison of both
+*/
 int compareCountries(const void *a, const void *b) {
     return strcmp((*(CountryNode **)a)->country, (*(CountryNode **)b)->country);
 }
@@ -114,12 +122,13 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
                 char * adding;
                 adding = readLine(stdin);
                 if (strcmp(adding, "more data") == 0) {
-                   
                     double avgMile = calculateAverageMilesPerFlight(flight->totalMiles, flight->totalTrips);
                     char *fTime = calculateFlightTime(flight->departTime, flight->arrivalTime);
+                    double earnings = calculateTotalRevenue(flight->seats, 409.99)
                     printf("\nThis plane's average miles per trip: %.2f miles\n", avgMile);
                     printf("Total Travel Duration is %s\n", fTime);
-                    free(fTime); // Freeing the allocated memory
+                    printf("Total Expected Earnings: %f\n", earnings);
+                    free(fTime);
                 }
                 break;
             }
@@ -132,12 +141,19 @@ void displaySingleFlightData(FlightDatabase *fdatab, char const *str) {
     }
 }
 
+/**
+* Display the Header for the Airport Information to Console
+*/
 void dispAirportHeader() 
 {
     printf("|     Country     |        Airport        |\n");
     printf("|-----------------+-----------------------+\n");
 }
 
+/**
+    Display all available airports in the current flight database
+    @param fdatab the database to check 
+*/
 void displayAllAirports(FlightDatabase *fdatab) {
     HashTable *table = createTable(TABLE_SIZE);
 

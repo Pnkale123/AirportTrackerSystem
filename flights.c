@@ -154,6 +154,13 @@ void insertAirport(HashTable *table, const char *country, const char *airport) {
     countryNode->airports = airportNode;
 }
 
+/**
+    Calculate all the Average Miles per Flight 
+    Allows customer to know usual flight miles on each travel
+    @param miles the mileage of plane
+    @param trips the # of trips the plane has chartered
+    @return avgMiles the average miles per trip
+*/
 double calculateAverageMilesPerFlight(double miles, int trips) {
     double average = (double) miles / trips;
     return average;
@@ -168,7 +175,7 @@ double calculateAverageMilesPerFlight(double miles, int trips) {
 */
 char* calculateFlightTime(const char departTime[], const char arrivalTime[]) 
 {
-   int departHour, departMinutes, arrivalHour, arrivalMinutes;
+    int departHour, departMinutes, arrivalHour, arrivalMinutes;
     char departFormat[3], arrivalFormat[3];
 
     sscanf(departTime, "%d:%d %2s", &departHour, &departMinutes, departFormat);
@@ -193,7 +200,7 @@ char* calculateFlightTime(const char departTime[], const char arrivalTime[])
     int minutes = totalMinutes % 60;
 
     char* time = (char*)malloc(30);
-    // Format the result
+  
     sprintf(time, "%d hours and %d minutes", hours, minutes);
     return time;
 }
@@ -204,7 +211,6 @@ char* calculateFlightTime(const char departTime[], const char arrivalTime[])
 */
 double calculateTotalRevenue(int numSeats, double pricePerSeat)
 {
-    // Calculate price of seats using fixed price
     double price = numSeats * pricePerSeat;
     return price;
 } 
