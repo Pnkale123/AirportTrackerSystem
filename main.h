@@ -7,12 +7,18 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+/** 
+*  Enumeration for Class Types
+*/
 typedef enum {
   FIRST,
   PREMIUM,
   ECONOMY
 } Class;
 
+/**
+*  Enumeration for any Special Requests for Client
+*/
 typedef enum {
     NONE,
     ANIMAL,
@@ -24,6 +30,10 @@ typedef enum {
     OTHER
 } SpecialRequest;
 
+/**
+*  Struct to define the various elements of a flight booking 
+*  Includes name, class, DOB, special requests
+*/
 typedef struct {
     char first[20];
     char last[20];
