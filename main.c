@@ -1,6 +1,7 @@
 /**
 *  Responsible for orchestrating the program, 
 *  getting user input, and calling functions from other files.
+
 *  @file Main.c 
 *  @author Pranav Kale pkale 
 */
@@ -20,7 +21,7 @@
 #include "input.h"
 #include "main.h"
 
-// Function prototypes
+// Function prototypes for functions declared after main() for compilation
 void loadFlightData(const char *filename, FlightDatabase *fdatab);
 void collectData(const char *booking, Booking *bookingInfo);
 void bookFlight(FlightDatabase *fdatab);
