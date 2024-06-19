@@ -125,7 +125,6 @@ void insertAirport(HashTable *table, const char *country, const char *airport) {
     unsigned int index = hash(country);
     CountryNode *countryNode = table->buckets[index];
 
-    // Find a valid country node
     while (countryNode != NULL && strcmp(countryNode->country, country) != 0) {
         countryNode = countryNode->next;
     }
@@ -180,7 +179,6 @@ char* calculateFlightTime(const char departTime[], const char arrivalTime[])
     sscanf(departTime, "%d:%d %2s", &departHour, &departMinutes, departFormat);
     sscanf(arrivalTime, "%d:%d %2s", &arrivalHour, &arrivalMinutes, arrivalFormat);
 
-    // Convert to 24-hour format if needed
     if (strcmp(departFormat, "PM") == 0 && departHour < 12) {
         departHour += 12;
     }

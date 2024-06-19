@@ -48,8 +48,8 @@ int main(int argc, char *argv[]) {
 
     FlightDatabase *fdatab = makeDatabase();
 
-    // Debugging
-    for (int i = 2; i < argc; i++) {
+    
+    for (int i = 1; i < argc; i++) {
         loadFlightData(argv[i], fdatab);
     }
     
@@ -115,6 +115,7 @@ int main(int argc, char *argv[]) {
         
     }
     freeFlightDatabase(fdatab);
+    clearConsole();
     printf("Exiting the Flight Manager Application...\n\n");
         
     return EXIT_SUCCESS;
@@ -162,12 +163,16 @@ void generateItineraryNumber(char *itineraryNumber) {
     itineraryNumber[6] = '\0';
 }
 
+/**
+    Checks if the date string is valid
+    @param date the date to check
+    @return true or false if the string is valid or not
+*/
 bool isValidDate(const char *date) {
     int year, month, day;
     if (sscanf(date, "%4d-%2d-%2d", &year, &month, &day) != 3) {
         return false;
     }
-    // Additional checks can be added for month and day range validation
     if (year < 1900 || year > 2100 || month < 1 || month > 12 || day < 1 || day > 31) {
         return false;
     }
