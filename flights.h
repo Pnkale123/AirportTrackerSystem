@@ -11,7 +11,7 @@
 #ifndef FLIGHTS_H
 #define FLIGHTS_H
 
-#define INITIALCAP 12
+#define INITIALCAP 15
 #define TABLE_SIZE 100
 
 /** 

@@ -1,0 +1,13 @@
+Current Date: 08/25/2024
+Flight ID: Q789
+Flight Departure Airport: Sydney Kingsford Intl
+Flight Departure Country: NSW, Australia
+Flight Departure Time: 10:30 AM
+Flight Arrival Time: 7:45 PM
+Flight Arrival Airport: Heathrow Airport
+Seats: 300
+Aircraft Type: Boeing 787-9 Dreamliner
+Pilot: Captain Michael Anderson
+Total Miles on Plane: 934006
+Total Trips by Plane: 253
+Operator: Qantas Airlines

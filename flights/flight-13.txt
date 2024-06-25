@@ -1,0 +1,13 @@
+Current Date: 11/13/2024
+Flight ID: A307
+Flight Departure Airport: Los Angeles Intl
+Flight Departure Country: CA, USA
+Flight Departure Time: 7:10 AM
+Flight Arrival Time: 12:30 PM
+Flight Arrival Airport: John F. Kennedy Intl
+Seats: 180
+Aircraft Type: Boeing 737-800
+Pilot: Captain Sarah Johnson
+Total Miles on Plane: 350123
+Total Trips by Plane: 150
+Operator: Delta Airlines

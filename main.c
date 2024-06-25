@@ -7,7 +7,7 @@
 */
 
 #define SUCCESS 0
-#define MAX_FLIGHTS 12
+#define MAX_FLIGHTS 15
 #define MATCHES2 2
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
@@ -41,8 +41,9 @@ static void usage()
     @param argc the arguments
 */
 int main(int argc, char *argv[]) {
+    printf("%d", argc);
 
-    if (argc < MATCHES2 || argc > MAX_FLIGHTS) {
+    if (argc < MATCHES2 || argc > MAX_FLIGHTS + 1) {
         usage();
     }
 
