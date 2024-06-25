@@ -20,11 +20,13 @@
 #include "display.h"
 #include "input.h"
 #include "main.h"
+#include "database.h"
+
 
 // Function prototypes for functions declared after main() for compilation
 void loadFlightData(const char *filename, FlightDatabase *fdatab);
 void collectData(const char *booking, Booking *bookingInfo);
-void bookFlight(FlightDatabase *fdatab);
+void bookFlight(FlightDatabase *fdatab, sqlite3 *db);
 
 /**
 * Prints a message when program is given invalid arguments 
@@ -41,7 +43,8 @@ static void usage()
     @param argc the arguments
 */
 int main(int argc, char *argv[]) {
-    printf("%d", argc);
+    printf("%d", argc - 1);
+    printf(" flights uploaded to application!\n");
 
     if (argc < MATCHES2 || argc > MAX_FLIGHTS + 1) {
         usage();
@@ -54,6 +57,11 @@ int main(int argc, char *argv[]) {
         loadFlightData(argv[i], fdatab);
     }
     
+    sqlite3 *db = initializeDatabase();
+    if (db == NULL) {
+        return EXIT_FAILURE;
+    }
+
     char *command;
 
     displayApp();
@@ -90,7 +98,7 @@ int main(int argc, char *argv[]) {
             free(command);
         } else if (strcmp(command, "book") == 0) {
             printf("booking your flight...\n\n");
-            bookFlight(fdatab);
+            bookFlight(fdatab, db);
             free(command);
         } else if (strcmp(command, "list airports") == 0) {
             printf("%s\n\n", command);
@@ -104,8 +112,10 @@ int main(int argc, char *argv[]) {
             putchar('\n');
             free(command);
             break;
+        } else if (strcmp(command, "") == 0) {
+            free(command);
         } else {
-            printf(".------------------.\n");
+            printf("\n.------------------.\n");
             printf("| Invalid command! |\n");
             printf(".------------------.\n\n");
       
@@ -115,6 +125,7 @@ int main(int argc, char *argv[]) {
         printf("\n");
         
     }
+    sqlite3_close(db);
     freeFlightDatabase(fdatab);
     clearConsole();
     printf("Exiting the Flight Manager Application...\n\n");
@@ -171,10 +182,10 @@ void generateItineraryNumber(char *itineraryNumber) {
 */
 bool isValidDate(const char *date) {
     int year, month, day;
-    if (sscanf(date, "%4d-%2d-%2d", &year, &month, &day) != 3) {
+    if (sscanf(date, "%4d/%2d/%2d", &year, &month, &day) != 3) {
         return false;
     }
-    if (year < 1900 || year > 2100 || month < 1 || month > 12 || day < 1 || day > 31) {
+    if (year < 1900 || year > 2050 || month < 1 || month > 12 || day < 1 || day > 31) {
         return false;
     }
     return true;
@@ -209,7 +220,7 @@ void collectData(const char *booking, Booking *bookingInfo) {
     generateItineraryNumber(bookingInfo->itineraryNumber);
 
     do {
-        printf("\nEnter your Date of Birth (YYYY-MM-DD): ");
+        printf("\nEnter your Date of Birth (YYYY/MM/DD): ");
         scanf("%s[^\n]", bookingInfo->dateOfBirth);
     } while (!isValidDate(bookingInfo->dateOfBirth));
 
@@ -243,14 +254,12 @@ void collectData(const char *booking, Booking *bookingInfo) {
     Books a flight for the user
     @param fdatab the flight database
 */
-void bookFlight(FlightDatabase *fdatab) {
+void bookFlight(FlightDatabase *fdatab, sqlite3 *db) {
     Booking bookingInfo;
-    char flightID[10];
+    char *flightID;
 
     printf("Enter the Flight ID to book: ");
-
-    fgets(flightID, 10, stdin);
-    flightID[strcspn(flightID, "\n")] = 0;
+    flightID = readLine(stdin);
 
     bool found = false;
     for (int i = 0; i < fdatab->count; i++) {
@@ -263,6 +272,7 @@ void bookFlight(FlightDatabase *fdatab) {
         printf("Oops! This flight was not found in our database. Try again!\n");
     } else {
         collectData(flightID, &bookingInfo);
+        insertBooking(db, &bookingInfo, flightID);
         printf("\n+----------------------------------------------------+\n");
         printf("Booking confirmed for %s %s on flight %s\n", bookingInfo.first, bookingInfo.last, flightID);
         printf("Itinerary Number: %s\n", bookingInfo.itineraryNumber);
@@ -277,6 +287,6 @@ void bookFlight(FlightDatabase *fdatab) {
             (bookingInfo.specialRequest == VEGAN) ? "Vegan" : "Veteran"
         );
         printf("+----------------------------------------------------+\n");
-
+       
     }
 }
