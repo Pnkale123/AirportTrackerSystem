@@ -154,8 +154,9 @@ void loadFlightData(const char *filename, FlightDatabase *fdatab) {
 }
 
 /**
- * Function to convert a string to uppercase
- */
+  Function to convert a string to uppercase
+  @param str the string to make upper case 
+*/
 void toUpperCase(char *str) {
     for (int i = 0; str[i]; i++) {
         str[i] = toupper(str[i]);
@@ -163,8 +164,9 @@ void toUpperCase(char *str) {
 }
 
 /**
- * Function to get a random itinerary number
- */
+  Function to get a random itinerary number
+  @param itineraryNumber pointer for generation
+*/
 void generateItineraryNumber(char *itineraryNumber) {
     const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     itineraryNumber[0] = '#';
@@ -253,6 +255,7 @@ void collectData(const char *booking, Booking *bookingInfo) {
 /**
     Books a flight for the user
     @param fdatab the flight database
+    @param db the SQL Database to store inside
 */
 void bookFlight(FlightDatabase *fdatab, sqlite3 *db) {
     Booking bookingInfo;
