@@ -4,7 +4,7 @@ Flight Departure Airport: Heathrow Airport
 Flight Departure Country: London, UK
 Flight Departure Time: 9:55 PM
 Flight Arrival Time: 11:25 AM
-Flight Arrival Airport: Chhatrapati Shivaji Intl
+Flight Arrival Airport: Chhatrapati Shivaji
 Seats: 275
 Aircraft Type: Airbus A350-1000
 Pilot: Captain Baljeet Singh

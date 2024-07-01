@@ -7,7 +7,7 @@
 */
 
 #define SUCCESS 0
-#define MAX_FLIGHTS 15
+#define MAX_FLIGHTS 19
 #define MATCHES2 2
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     if (argc < MATCHES2 || argc > MAX_FLIGHTS + 1) {
         usage();
     }
-
+    printf("Debug1");
     FlightDatabase *fdatab = makeDatabase();
 
     
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
     if (db == NULL) {
         return EXIT_FAILURE;
     }
-
+    printf("Debug2");
     char *command;
 
     displayApp();
@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
                                      "Book your flight - Enter -> book \n", 
                                      "Quit the Application - Enter -> quit \n",
                                      "For Help - Enter -> help commands \n"};  
-
+printf("Debug3");
     displayMenuOptions(options);
     while (true) {
        

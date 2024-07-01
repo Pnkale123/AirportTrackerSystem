@@ -1,7 +1,7 @@
 Current Date: 02/20/2024
 Flight ID: AI995
 Flight Departure Airport: Indira Gandhi Intl
-Flight Departure Country: India
+Flight Departure Country: UP, India
 Flight Departure Time: 8:00 PM
 Flight Arrival Time: 10:30 PM
 Flight Arrival Airport: Dubai Intl
