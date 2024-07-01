@@ -1,0 +1,13 @@
+Current Date: 09/12/2024
+Flight ID: SQ494
+Flight Departure Airport: Changi Airport
+Flight Departure Country: Singapore
+Flight Departure Time: 11:30 PM
+Flight Arrival Time: 2:55 AM
+Flight Arrival Airport: Dubai Intl
+Seats: 293
+Aircraft Type: Boeing 787-10
+Pilot: Captain Jasmine Tan
+Total Miles on Plane: 980045
+Total Trips by Plane: 205
+Operator: Singapore Airlines

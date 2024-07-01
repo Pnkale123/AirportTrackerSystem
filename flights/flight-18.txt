@@ -1,0 +1,13 @@
+Current Date: 04/24/2024
+Flight ID: AI381
+Flight Departure Airport: Indira Gandhi Intl
+Flight Departure Country: India
+Flight Departure Time: 11:45 PM
+Flight Arrival Time: 6:30 AM
+Flight Arrival Airport: Changi Airport
+Seats: 260
+Aircraft Type: Boeing 787-9 Dreamliner
+Pilot: Captain Rajesh Kumar
+Total Miles on Plane: 710240
+Total Trips by Plane: 175
+Operator: Air India

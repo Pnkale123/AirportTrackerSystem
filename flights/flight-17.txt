@@ -1,0 +1,13 @@
+Current Date: 06/16/2024
+Flight ID: SQ231
+Flight Departure Airport: Changi Airport
+Flight Departure Country: Singapore
+Flight Departure Time: 9:00 AM
+Flight Arrival Time: 6:30 PM
+Flight Arrival Airport: Sydney Kingsford
+Seats: 285
+Aircraft Type: Airbus A350-900
+Pilot: Captain Emily Wong
+Total Miles on Plane: 820175
+Total Trips by Plane: 195
+Operator: Singapore Airlines
